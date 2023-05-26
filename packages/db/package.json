@@ -12,7 +12,8 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
-    "@prisma/client": "^4.14.1"
+    "@planetscale/database": "^1.7.0",
+    "@prisma/client": "^4.14.1",
   },
   "devDependencies": {
     "dotenv-cli": "^7.2.1",
