@@ -27,5 +27,8 @@
     "prettier-plugin-tailwindcss": "^0.2.8",
     "turbo": "^1.9.8",
     "typescript": "^5.0.4"
+  },
+  "devDependencies": {
+    "@netlify/plugin-nextjs": "^4.37.2"
   }
 }
