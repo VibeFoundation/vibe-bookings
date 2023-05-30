@@ -1,0 +1,10 @@
+language: 'typescript'
+
+tasks:
+    build:
+        command: 'tsc'
+    start:
+        command: 'node dist/index.js'
+    dev:
+        command: 'tsx watch index.ts'
+        local: true

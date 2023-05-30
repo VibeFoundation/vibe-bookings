@@ -1,0 +1,28 @@
+dependsOn:
+   - 'server'
+
+type: 'application'
+
+language: 'typescript'
+
+fileGroups:
+  app:
+    - 'env.d.ts'
+    - 'index.html'
+    - 'vite.config.*'
+
+tasks:
+    build:
+        command: 'vite build'
+        inputs:
+            - '@group(app)'
+            - '@group(sources)'
+        outputs:
+            - 'dist'
+    start:
+        command: 'vite preview'
+    dev:
+        command: 'vite'
+        deps:
+            - 'server:dev'
+        local: true

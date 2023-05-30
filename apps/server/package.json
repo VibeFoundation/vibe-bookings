@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "10.28.1",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch index.ts",
+    "lint": "eslint --cache --ext \".js,.ts,.tsx\" --report-unused-disable-directives index.ts",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@trpc/server": "^10.28.1",
+    "cors": "^2.8.5",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/node": "^20.2.5",
+    "eslint": "^8.41.0",
+    "tsx": "^3.12.7",
+    "typescript": "^5.0.4"
+  }
+}

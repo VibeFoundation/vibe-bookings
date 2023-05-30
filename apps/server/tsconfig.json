@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "composite": true,
+    "strict": true,
+    "outDir": "../../.moon/cache/types/apps/server"
+  }
+}
