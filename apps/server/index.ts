@@ -2,12 +2,49 @@
  * This is the API-handler of your app that contains all your API routes.
  * On a bigger app, you will probably want to split this file up into multiple files.
  */
-import { initTRPC } from "@trpc/server";
+import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
+import { inferAsyncReturnType, initTRPC } from "@trpc/server";
 import { createHTTPServer } from "@trpc/server/adapters/standalone";
 import cors from "cors";
 import { z } from "zod";
+import { prisma } from "./src/prisma";
 
-const t = initTRPC.create();
+/**
+ * 1. CONTEXT
+ *
+ * This section defines the "contexts" that are available in the backend API
+ *
+ * These allow you to access things like the database, the session, etc, when
+ * processing a request
+ *
+ */
+type CreateContextOptions = {
+  // session: Session | null;
+};
+
+/**
+ * This helper generates the "internals" for a tRPC context. If you need to use
+ * it, you can export it from here
+ *
+ * Examples of things you may need it for:
+ * - testing, so we dont have to mock Next.js' req/res
+ * - trpc's `createSSGHelpers` where we don't have req/res
+ * @see https://create.t3.gg/en/usage/trpc#-servertrpccontextts
+ */
+const createInnerTRPCContext = (_opts: CreateContextOptions) => {
+  return {
+    prisma,
+  };
+};
+
+export const createContext = async (opts: CreateNextContextOptions) => {
+  // const session = await getSession({ req: opts.req });
+
+  return createInnerTRPCContext(opts);
+};
+
+type Context = inferAsyncReturnType<typeof createContext>;
+const t = initTRPC.context<Context>().create();
 
 const publicProcedure = t.procedure;
 const router = t.router;
@@ -40,8 +77,5 @@ export type AppRouter = typeof appRouter;
 createHTTPServer({
   middleware: cors(),
   router: appRouter,
-  createContext() {
-    console.log("context 3");
-    return {};
-  },
+  createContext,
 }).listen(2022);
