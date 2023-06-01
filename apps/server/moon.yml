@@ -7,4 +7,6 @@ tasks:
         command: 'node dist/index.js'
     dev:
         command: 'tsx watch index.ts'
+        env:
+            NODE_ENV: 'development'
         local: true

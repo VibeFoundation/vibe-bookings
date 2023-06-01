@@ -7,6 +7,7 @@ import { createHTTPServer } from "@trpc/server/adapters/standalone";
 import cors from "cors";
 import { z } from "zod";
 import { prisma } from "./src/prisma";
+import { env } from "./src/env";
 
 /**
  * 1. CONTEXT
@@ -74,7 +75,9 @@ export type AppRouter = typeof appRouter;
 
 // create server
 createHTTPServer({
-  middleware: cors(),
+  middleware: cors({
+    origin: env.NODE_ENV === "development" ? "*" : "https://ourwebsite.com",
+  }),
   router: appRouter,
   createContext,
 }).listen(2022);

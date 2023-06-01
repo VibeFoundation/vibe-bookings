@@ -3,6 +3,10 @@
  * It has to be a `.js`-file to be imported there.
  */
 import { z } from "zod";
+import { config } from "dotenv";
+import path from "path";
+
+config({ path: path.resolve(path.relative(process.cwd(), "../../"), ".env") });
 
 const envSchema = z.object({
   DATABASE_URL: z.string().url(),
