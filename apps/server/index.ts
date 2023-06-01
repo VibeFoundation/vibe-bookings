@@ -2,7 +2,6 @@
  * This is the API-handler of your app that contains all your API routes.
  * On a bigger app, you will probably want to split this file up into multiple files.
  */
-import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
 import { inferAsyncReturnType, initTRPC } from "@trpc/server";
 import { createHTTPServer } from "@trpc/server/adapters/standalone";
 import cors from "cors";
@@ -37,7 +36,7 @@ const createInnerTRPCContext = (_opts: CreateContextOptions) => {
   };
 };
 
-export const createContext = async (opts: CreateNextContextOptions) => {
+export const createContext = async (opts: CreateContextOptions) => {
   // const session = await getSession({ req: opts.req });
 
   return createInnerTRPCContext(opts);
