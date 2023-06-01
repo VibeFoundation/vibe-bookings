@@ -76,7 +76,10 @@ export type AppRouter = typeof appRouter;
 // create server
 createHTTPServer({
   middleware: cors({
-    origin: env.NODE_ENV === "development" ? "*" : "https://ourwebsite.com",
+    origin:
+      env.NODE_ENV === "development"
+        ? "*"
+        : "https://vibebookings.netlify.app/",
   }),
   router: appRouter,
   createContext,
