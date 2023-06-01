@@ -10,3 +10,7 @@ tasks:
         env:
             NODE_ENV: 'development'
         local: true
+    db-generate:
+        command: 'prisma generate'
+    db-push:
+        command: 'prisma push'
