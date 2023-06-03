@@ -2,7 +2,11 @@ import { z } from "zod";
 import { config } from "dotenv";
 import path from "path";
 
-config({ path: path.resolve(path.relative(process.cwd(), "../../"), ".env") });
+if (!process.env.CI) {
+  config({
+    path: path.resolve(path.relative(process.cwd(), "../../"), ".env"),
+  });
+}
 
 const envSchema = z.object({
   DATABASE_URL: z.string().url(),
