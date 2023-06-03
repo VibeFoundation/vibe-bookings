@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "tsc",
+    "db:generate": "prisma generate",
     "dev": "tsx watch index.ts",
     "lint": "eslint --cache --ext \".js,.ts,.tsx\" --report-unused-disable-directives index.ts",
     "start": "node dist/index.js"
