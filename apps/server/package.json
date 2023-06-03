@@ -22,6 +22,7 @@
     "@types/cors": "^2.8.13",
     "@types/node": "^20.2.5",
     "eslint": "^8.41.0",
+    "netlify-cli": "^15.3.1",
     "prisma": "^4.14.1",
     "tsx": "^3.12.7",
     "typescript": "^5.0.4"

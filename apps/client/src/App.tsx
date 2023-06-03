@@ -10,7 +10,9 @@ export function App() {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: "https://vibebookings.netlify.app/.netlify/functions/index",
+          url: process.env.URL
+            ? process.env.URL
+            : "http://localhost:8888/.netlify/functions/index",
         }),
       ],
     })

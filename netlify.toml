@@ -1,9 +1,6 @@
 [functions]
-  external_node_modules = ["@trpc/server"]
-  node_bundler = "esbuild"
   directory = 'apps/server'
 [[redirects]]
-  force = true
-  from = "/api/*"
+  from = "/*"
+  to = "/index.html"
   status = 200
-  to = "/.netlify/functions/api/:splat"

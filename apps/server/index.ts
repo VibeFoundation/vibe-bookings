@@ -10,7 +10,8 @@ import {
   type CreateNetlifyContextOptions,
 } from "trpc-netlify-functions";
 import type { Handler } from "@netlify/functions";
-import { PrismaClient } from "@prisma/client";
+// import { prisma } from "./src/prisma";
+
 /**
  * 1. CONTEXT
  *
@@ -24,10 +25,6 @@ import { PrismaClient } from "@prisma/client";
 // session: Session | null;
 // };
 
-const prisma = new PrismaClient({
-  log: env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
-});
-
 /**
  * This helper generates the "internals" for a tRPC context. If you need to use
  * it, you can export it from here
@@ -39,7 +36,7 @@ const prisma = new PrismaClient({
  */
 const createInnerTRPCContext = (_opts: CreateNetlifyContextOptions) => {
   return {
-    prisma,
+    // prisma,
   };
 };
 
