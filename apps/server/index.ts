@@ -3,16 +3,14 @@
  * On a bigger app, you will probably want to split this file up into multiple files.
  */
 import { type inferAsyncReturnType, initTRPC } from "@trpc/server";
-import { createHTTPServer } from "@trpc/server/adapters/standalone";
-import cors from "cors";
 import { z } from "zod";
-import { prisma } from "./src/prisma";
 import { env } from "./src/env";
 import {
   netlifyTRPCHandler,
   type CreateNetlifyContextOptions,
 } from "trpc-netlify-functions";
 import type { Handler } from "@netlify/functions";
+import { PrismaClient } from "@prisma/client";
 /**
  * 1. CONTEXT
  *
@@ -25,6 +23,10 @@ import type { Handler } from "@netlify/functions";
 // type CreateContextOptions = {
 // session: Session | null;
 // };
+
+const prisma = new PrismaClient({
+  log: env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
+});
 
 /**
  * This helper generates the "internals" for a tRPC context. If you need to use
