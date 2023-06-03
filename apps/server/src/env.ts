@@ -10,7 +10,7 @@ if (!process.env.CI) {
 
 const envSchema = z.object({
   DATABASE_URL: z.string().url(),
-  NODE_ENV: z.enum(["development", "test", "production"]),
+  NODE_ENV: z.enum(["development", "test", "production"]).default("production"),
   URL: z.string().optional(),
   PORT: z.number().optional().default(2022),
 });
