@@ -19,6 +19,7 @@ export function App() {
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
+        <h1>Hello</h1>
         <Greeting />
       </QueryClientProvider>
     </trpc.Provider>
