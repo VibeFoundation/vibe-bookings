@@ -3,7 +3,6 @@ import { httpBatchLink } from "@trpc/client";
 import { useState } from "react";
 import { Greeting } from "./Greeting";
 import { trpc } from "./utils/trpc";
-import { env } from "server";
 
 export function App() {
   const [queryClient] = useState(() => new QueryClient());
@@ -11,7 +10,7 @@ export function App() {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: env.URL ? env.URL : "http://localhost:2022",
+          url: process.env.URL ? process.env.URL : "http://localhost:2022",
         }),
       ],
     })
