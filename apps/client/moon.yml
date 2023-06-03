@@ -19,6 +19,8 @@ tasks:
             - '@group(sources)'
         outputs:
             - 'dist'
+        deps:
+            - 'server:build'
     start:
         command: 'vite preview'
     dev:

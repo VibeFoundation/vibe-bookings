@@ -2,7 +2,7 @@
  * This is the API-handler of your app that contains all your API routes.
  * On a bigger app, you will probably want to split this file up into multiple files.
  */
-import { inferAsyncReturnType, initTRPC } from "@trpc/server";
+import { type inferAsyncReturnType, initTRPC } from "@trpc/server";
 import { createHTTPServer } from "@trpc/server/adapters/standalone";
 import cors from "cors";
 import { z } from "zod";
@@ -69,18 +69,15 @@ const appRouter = router({
     }),
 });
 
-// export only the type definition of the API
-// None of the actual implementation is exposed to the client
 export type AppRouter = typeof appRouter;
+
+export { env };
 
 // create server
 createHTTPServer({
   middleware: cors({
-    origin:
-      env.NODE_ENV === "development"
-        ? "*"
-        : "https://vibebookings.netlify.app/",
+    origin: env.URL ? env.URL : "*",
   }),
   router: appRouter,
   createContext,
-}).listen(2022);
+}).listen(env.PORT);
