@@ -8,7 +8,10 @@ import cors from "cors";
 import { z } from "zod";
 import { prisma } from "./src/prisma";
 import { env } from "./src/env";
-
+import {
+  netlifyTRPCHandler,
+  type CreateNetlifyContextOptions,
+} from "trpc-netlify-functions";
 /**
  * 1. CONTEXT
  *
@@ -18,9 +21,9 @@ import { env } from "./src/env";
  * processing a request
  *
  */
-type CreateContextOptions = {
-  // session: Session | null;
-};
+// type CreateContextOptions = {
+// session: Session | null;
+// };
 
 /**
  * This helper generates the "internals" for a tRPC context. If you need to use
@@ -31,13 +34,13 @@ type CreateContextOptions = {
  * - trpc's `createSSGHelpers` where we don't have req/res
  * @see https://create.t3.gg/en/usage/trpc#-servertrpccontextts
  */
-const createInnerTRPCContext = (_opts: CreateContextOptions) => {
+const createInnerTRPCContext = (_opts: CreateNetlifyContextOptions) => {
   return {
     prisma,
   };
 };
 
-export const createContext = async (opts: CreateContextOptions) => {
+export const createContext = async (opts: CreateNetlifyContextOptions) => {
   // const session = await getSession({ req: opts.req });
 
   return createInnerTRPCContext(opts);
@@ -74,10 +77,8 @@ export type AppRouter = typeof appRouter;
 export { env };
 
 // create server
-createHTTPServer({
-  middleware: cors({
-    origin: env.URL ? env.URL : "*",
-  }),
+
+export const handler = netlifyTRPCHandler({
   router: appRouter,
   createContext,
-}).listen(env.PORT);
+});
