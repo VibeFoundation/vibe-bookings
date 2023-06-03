@@ -12,6 +12,7 @@ import {
   netlifyTRPCHandler,
   type CreateNetlifyContextOptions,
 } from "trpc-netlify-functions";
+import type { Handler } from "@netlify/functions";
 /**
  * 1. CONTEXT
  *
@@ -78,7 +79,7 @@ export { env };
 
 // create server
 
-export const handler = netlifyTRPCHandler({
+export const handler: Handler = netlifyTRPCHandler({
   router: appRouter,
   createContext,
 });
