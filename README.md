@@ -42,6 +42,15 @@ bunx --bun run check
 ```
 
 
+## Shadcn
+
+Add components using the latest version of [Shadcn](https://ui.shadcn.com/).
+
+```bash
+bunx shadcn@latest add https://jollyui.dev/new-york/button
+```
+
+
 ## T3Env
 
 - You can use T3Env to add type safety to your environment variables.

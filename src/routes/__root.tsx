@@ -2,15 +2,23 @@ import {
   Outlet,
   HeadContent,
   Scripts,
-  createRootRoute,
+  createRootRouteWithContext,
 } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 
 import Header from '../components/Header'
 
+import TanStackQueryLayout from '../integrations/tanstack-query/layout.tsx'
+
 import appCss from '../styles.css?url'
 
-export const Route = createRootRoute({
+import type { QueryClient } from '@tanstack/react-query'
+
+interface MyRouterContext {
+  queryClient: QueryClient
+}
+
+export const Route = createRootRouteWithContext<MyRouterContext>()({
   head: () => ({
     meta: [
       {
@@ -38,6 +46,8 @@ export const Route = createRootRoute({
 
       <Outlet />
       <TanStackRouterDevtools />
+
+      <TanStackQueryLayout />
     </RootDocument>
   ),
 })
