@@ -1,11 +1,11 @@
-import { cva, type VariantProps } from "class-variance-authority"
+import { cva, type VariantProps } from "class-variance-authority";
 import {
   Button as AriaButton,
   composeRenderProps,
   type ButtonProps as AriaButtonProps,
-} from "react-aria-components"
+} from "react-aria-components";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
   [
@@ -43,7 +43,7 @@ const buttonVariants = cva(
       size: "default",
     },
   }
-)
+);
 
 interface ButtonProps
   extends AriaButtonProps,
@@ -63,8 +63,8 @@ const Button = ({ className, variant, size, ...props }: ButtonProps) => {
       )}
       {...props}
     />
-  )
-}
+  );
+};
 
-export { Button, buttonVariants }
-export type { ButtonProps }
+export { Button, buttonVariants };
+export type { ButtonProps };
