@@ -2,9 +2,9 @@ import { CheckIcon } from "@radix-ui/react-icons";
 import {
 	Radio as AriaRadio,
 	RadioGroup as AriaRadioGroup,
-	RadioGroupProps as AriaRadioGroupProps,
-	RadioProps as AriaRadioProps,
-	ValidationResult as AriaValidationResult,
+	type RadioGroupProps as AriaRadioGroupProps,
+	type RadioProps as AriaRadioProps,
+	type ValidationResult as AriaValidationResult,
 	composeRenderProps,
 	Text,
 } from "react-aria-components";

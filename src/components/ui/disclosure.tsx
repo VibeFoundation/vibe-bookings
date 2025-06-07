@@ -1,16 +1,17 @@
 "use client";
 
-import React, { useContext } from "react";
+import type React from "react";
+import { useContext } from "react";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import {
 	Disclosure as AriaDisclosure,
 	DisclosureGroup as AriaDisclosureGroup,
-	DisclosureGroupProps as AriaDisclosureGroupProps,
+	type DisclosureGroupProps as AriaDisclosureGroupProps,
 	DisclosurePanel as AriaDisclosurePanel,
-	DisclosurePanelProps as AriaDisclosurePanelProps,
-	DisclosureProps as AriaDisclosureProps,
+	type DisclosurePanelProps as AriaDisclosurePanelProps,
+	type DisclosureProps as AriaDisclosureProps,
 	Button,
-	ButtonProps,
+	type ButtonProps,
 	composeRenderProps,
 	DisclosureGroupStateContext,
 	Heading,
@@ -23,7 +24,7 @@ export interface DisclosureProps extends AriaDisclosureProps {
 }
 
 function Disclosure({ children, className, ...props }: DisclosureProps) {
-	let isInGroup = useContext(DisclosureGroupStateContext) !== null;
+	const isInGroup = useContext(DisclosureGroupStateContext) !== null;
 	return (
 		<AriaDisclosure
 			{...props}

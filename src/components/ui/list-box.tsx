@@ -6,8 +6,8 @@ import {
 	Header as AriaHeader,
 	ListBox as AriaListBox,
 	ListBoxItem as AriaListBoxItem,
-	ListBoxItemProps as AriaListBoxItemProps,
-	ListBoxProps as AriaListBoxProps,
+	type ListBoxItemProps as AriaListBoxItemProps,
+	type ListBoxProps as AriaListBoxProps,
 	Section as AriaSection,
 	composeRenderProps,
 } from "react-aria-components";

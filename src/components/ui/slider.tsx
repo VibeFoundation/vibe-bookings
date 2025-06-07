@@ -62,7 +62,7 @@ const SliderFillTrack = ({
 	className,
 	...props
 }: React.HTMLAttributes<HTMLDivElement>) => {
-	let state = React.useContext(AriaSliderStateContext)!;
+	const state = React.useContext(AriaSliderStateContext)!;
 	const orientation = state.orientation === "vertical" ? "height" : "width";
 	return (
 		<div

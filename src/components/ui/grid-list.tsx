@@ -5,8 +5,8 @@ import {
 	Button as AriaButton,
 	GridList as AriaGridList,
 	GridListItem as AriaGridListItem,
-	GridListItemProps as AriaGridListItemProps,
-	GridListProps as AriaGridListProps,
+	type GridListItemProps as AriaGridListItemProps,
+	type GridListProps as AriaGridListProps,
 	composeRenderProps,
 } from "react-aria-components";
 
@@ -39,7 +39,7 @@ export function GridListItem({
 	className,
 	...props
 }: AriaGridListItemProps) {
-	let textValue = typeof children === "string" ? children : undefined;
+	const textValue = typeof children === "string" ? children : undefined;
 	return (
 		<AriaGridListItem
 			textValue={textValue}

@@ -4,10 +4,10 @@ import {
 	Button as AriaButton,
 	Tag as AriaTag,
 	TagGroup as AriaTagGroup,
-	TagGroupProps as AriaTagGroupProps,
+	type TagGroupProps as AriaTagGroupProps,
 	TagList as AriaTagList,
-	TagListProps as AriaTagListProps,
-	TagProps as AriaTagProps,
+	type TagListProps as AriaTagListProps,
+	type TagProps as AriaTagProps,
 	composeRenderProps,
 	Text,
 } from "react-aria-components";
@@ -73,7 +73,7 @@ const badgeVariants = cva(
 );
 
 function Tag({ children, className, ...props }: AriaTagProps) {
-	let textValue = typeof children === "string" ? children : undefined;
+	const textValue = typeof children === "string" ? children : undefined;
 	return (
 		<AriaTag
 			textValue={textValue}

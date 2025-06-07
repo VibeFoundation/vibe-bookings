@@ -2,12 +2,12 @@
 
 import { CaretDownIcon, CaretUpIcon } from "@radix-ui/react-icons";
 import {
-	ButtonProps as AriaButtonProps,
+	type ButtonProps as AriaButtonProps,
 	Input as AriaInput,
-	InputProps as AriaInputProps,
+	type InputProps as AriaInputProps,
 	NumberField as AriaNumberField,
-	NumberFieldProps as AriaNumberFieldProps,
-	ValidationResult as AriaValidationResult,
+	type NumberFieldProps as AriaNumberFieldProps,
+	type ValidationResult as AriaValidationResult,
 	composeRenderProps,
 	Text,
 } from "react-aria-components";

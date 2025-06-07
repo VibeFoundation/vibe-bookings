@@ -3,14 +3,14 @@
 import { Cross2Icon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import {
 	Button as AriaButton,
-	ButtonProps as AriaButtonProps,
+	type ButtonProps as AriaButtonProps,
 	Group as AriaGroup,
-	GroupProps as AriaGroupProps,
+	type GroupProps as AriaGroupProps,
 	Input as AriaInput,
-	InputProps as AriaInputProps,
+	type InputProps as AriaInputProps,
 	SearchField as AriaSearchField,
-	SearchFieldProps as AriaSearchFieldProps,
-	ValidationResult as AriaValidationResult,
+	type SearchFieldProps as AriaSearchFieldProps,
+	type ValidationResult as AriaValidationResult,
 	composeRenderProps,
 	Text,
 } from "react-aria-components";

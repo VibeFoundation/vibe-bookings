@@ -3,10 +3,10 @@ import {
 	UNSTABLE_Tree as AriaTree,
 	UNSTABLE_TreeItem as AriaTreeItem,
 	UNSTABLE_TreeItemContent as AriaTreeItemContent,
-	TreeItemProps as AriaTreeItemProps,
-	TreeProps as AriaTreeProps,
+	type TreeItemProps as AriaTreeItemProps,
+	type TreeProps as AriaTreeProps,
 	Button,
-	ButtonProps,
+	type ButtonProps,
 	composeRenderProps,
 } from "react-aria-components";
 

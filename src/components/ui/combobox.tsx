@@ -1,13 +1,13 @@
 import { CaretSortIcon } from "@radix-ui/react-icons";
 import {
 	ComboBox as AriaComboBox,
-	ComboBoxProps as AriaComboBoxProps,
+	type ComboBoxProps as AriaComboBoxProps,
 	Input as AriaInput,
-	InputProps as AriaInputProps,
+	type InputProps as AriaInputProps,
 	ListBox as AriaListBox,
-	ListBoxProps as AriaListBoxProps,
-	PopoverProps as AriaPopoverProps,
-	ValidationResult as AriaValidationResult,
+	type ListBoxProps as AriaListBoxProps,
+	type PopoverProps as AriaPopoverProps,
+	type ValidationResult as AriaValidationResult,
 	composeRenderProps,
 	Text,
 } from "react-aria-components";

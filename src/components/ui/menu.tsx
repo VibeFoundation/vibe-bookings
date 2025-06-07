@@ -3,7 +3,7 @@ import {
 	ChevronRightIcon,
 	DotFilledIcon,
 } from "@radix-ui/react-icons";
-import { type VariantProps } from "class-variance-authority";
+import type { VariantProps } from "class-variance-authority";
 import {
 	Header as AriaHeader,
 	Keyboard as AriaKeyboard,
@@ -22,7 +22,7 @@ import {
 
 import { cn } from "@/lib/utils";
 
-import { Button, buttonVariants } from "./button";
+import { Button, type buttonVariants } from "./button";
 import { ListBoxCollection, ListBoxSection } from "./list-box";
 import { SelectPopover } from "./select";
 

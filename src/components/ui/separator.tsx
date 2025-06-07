@@ -2,7 +2,7 @@
 
 import {
 	Separator as AriaSeparator,
-	SeparatorProps as AriaSeparatorProps,
+	type SeparatorProps as AriaSeparatorProps,
 } from "react-aria-components";
 
 import { cn } from "@/lib/utils";

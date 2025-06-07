@@ -4,21 +4,20 @@ import { CaretSortIcon } from "@radix-ui/react-icons";
 import {
 	Cell as AriaCell,
 	Column as AriaColumn,
-	ColumnProps as AriaColumnProps,
+	type ColumnProps as AriaColumnProps,
 	ResizableTableContainer as AriaResizableTableContainer,
 	Row as AriaRow,
 	Table as AriaTable,
 	TableBody as AriaTableBody,
 	TableHeader as AriaTableHeader,
-	CellProps,
+	type CellProps,
 	ColumnResizer,
 	composeRenderProps,
 	Group,
-	ResizableTableContainerProps,
-	RowProps,
-	TableBodyProps,
-	TableHeaderProps,
-	TableProps,
+	type RowProps,
+	type TableBodyProps,
+	type TableHeaderProps,
+	type TableProps,
 } from "react-aria-components";
 
 import { cn } from "@/lib/utils";

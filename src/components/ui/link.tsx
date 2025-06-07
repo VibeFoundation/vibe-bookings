@@ -1,4 +1,4 @@
-import { type VariantProps } from "class-variance-authority";
+import type { VariantProps } from "class-variance-authority";
 import { createLink, type LinkComponent } from "@tanstack/react-router";
 import {
 	mergeProps,
