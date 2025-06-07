@@ -14,6 +14,7 @@ import {
 import { cn } from "@/lib/utils";
 
 import { labelVariants } from "./field";
+import React from "react";
 
 const SliderOutput = ({ className, ...props }: AriaSliderOutputProps) => (
 	<AriaSliderOutput className={cn(labelVariants(), className)} {...props} />
@@ -62,11 +63,16 @@ const SliderFillTrack = ({
 	className,
 	...props
 }: React.HTMLAttributes<HTMLDivElement>) => {
-	const state = React.useContext(AriaSliderStateContext)!;
+	const state = React.useContext(AriaSliderStateContext);
+
+	if (!state) {
+		throw new Error("Missing AriaSliderStateContext");
+	}
+
 	const orientation = state.orientation === "vertical" ? "height" : "width";
 	return (
 		<div
-			style={{ [orientation]: state.getThumbPercent(0) * 100 + "%" }}
+			style={{ [orientation]: `${state.getThumbPercent(0) * 100}%` }}
 			className={cn(
 				"absolute rounded-full bg-primary",
 				{

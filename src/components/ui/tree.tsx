@@ -1,8 +1,8 @@
 import { ChevronRightIcon, InfoCircledIcon } from "@radix-ui/react-icons";
 import {
-	UNSTABLE_Tree as AriaTree,
-	UNSTABLE_TreeItem as AriaTreeItem,
-	UNSTABLE_TreeItemContent as AriaTreeItemContent,
+	Tree as AriaTree,
+	TreeItem as AriaTreeItem,
+	TreeItemContent as AriaTreeItemContent,
 	type TreeItemProps as AriaTreeItemProps,
 	type TreeProps as AriaTreeProps,
 	Button,
@@ -42,6 +42,7 @@ function TreeItemExpandButton({ className, children, ...props }: ButtonProps) {
 function TreeItemInfoButton({ className, children, ...props }: ButtonProps) {
 	return (
 		<Button
+			{...props}
 			aria-label="Info"
 			className={cn(
 				"ml-auto flex items-center justify-center rounded-md ring-offset-background",

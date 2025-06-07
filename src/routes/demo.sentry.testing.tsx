@@ -7,10 +7,10 @@
  */
 
 import * as fs from "node:fs/promises";
+import * as Sentry from "@sentry/tanstackstart-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-import * as Sentry from "@sentry/tanstackstart-react";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const Route = createFileRoute("/demo/sentry/testing")({
 	component: RouteComponent,
@@ -59,7 +59,7 @@ function RouteComponent() {
 	const [showTrace, setShowTrace] = useState<Record<string, boolean>>({});
 	const [spanOps, setSpanOps] = useState<Record<string, string>>({});
 	const [demoStep, setDemoStep] = useState(0);
-	const [replayEvents, setReplayEvents] = useState<string[]>([]);
+	const [_replayEvents, setReplayEvents] = useState<string[]>([]);
 	const [copiedSpan, setCopiedSpan] = useState<string | null>(null);
 	const startTimeRef = useRef<string>("");
 
@@ -71,7 +71,7 @@ function RouteComponent() {
 
 		if (demoStep > 0) {
 			const secondsElapsed = (
-				(new Date().getTime() - new Date(startTimeRef.current).getTime()) /
+				(Date.now() - new Date(startTimeRef.current).getTime()) /
 				1000
 			).toFixed(1);
 			setReplayEvents((prev) => [
@@ -194,6 +194,7 @@ function RouteComponent() {
 	return (
 		<>
 			<style
+				// biome-ignore lint/security/noDangerouslySetInnerHtml: demo
 				dangerouslySetInnerHTML={{
 					__html: `
           @keyframes fadeOut {
@@ -274,9 +275,9 @@ function RouteComponent() {
 									<div>
 										<button
 											type="button"
-											onClick={() => {
+											onClick={async () => {
 												setDemoStep((prev) => prev + 1);
-												handleClientError();
+												await handleClientError();
 											}}
 											className="w-full text-white rounded-md p-4 relative overflow-hidden group"
 											style={{
@@ -345,9 +346,9 @@ function RouteComponent() {
 									<div>
 										<button
 											type="button"
-											onClick={() => {
+											onClick={async () => {
 												setDemoStep((prev) => prev + 1);
-												handleClientTrace();
+												await handleClientTrace();
 											}}
 											className="w-full text-white rounded-md p-4 relative overflow-hidden group"
 											style={{
@@ -424,9 +425,9 @@ function RouteComponent() {
 									<div>
 										<button
 											type="button"
-											onClick={() => {
+											onClick={async () => {
 												setDemoStep((prev) => prev + 1);
-												handleServerError();
+												await handleServerError();
 											}}
 											className="w-full text-white rounded-md p-4 relative overflow-hidden group"
 											style={{
@@ -495,9 +496,9 @@ function RouteComponent() {
 									<div>
 										<button
 											type="button"
-											onClick={() => {
+											onClick={async () => {
 												setDemoStep((prev) => prev + 1);
-												handleServerTrace();
+												await handleServerTrace();
 											}}
 											className="w-full text-white rounded-md p-4 relative overflow-hidden group"
 											style={{

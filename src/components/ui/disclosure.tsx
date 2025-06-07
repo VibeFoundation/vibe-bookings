@@ -28,7 +28,7 @@ function Disclosure({ children, className, ...props }: DisclosureProps) {
 	return (
 		<AriaDisclosure
 			{...props}
-			className={composeRenderProps(className, (className, renderProps) =>
+			className={composeRenderProps(className, (className, _renderProps) =>
 				cn(
 					"group min-w-64",
 					isInGroup && "border-0 border-b last:border-b-0",
@@ -106,7 +106,7 @@ function DisclosureGroup({
 	return (
 		<AriaDisclosureGroup
 			{...props}
-			className={composeRenderProps(className, (className, renderProps) =>
+			className={composeRenderProps(className, (className, _renderProps) =>
 				cn("", className),
 			)}
 		>

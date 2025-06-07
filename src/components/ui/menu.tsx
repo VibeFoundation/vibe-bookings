@@ -79,10 +79,10 @@ const MenuItem = ({ children, className, ...props }: AriaMenuItemProps) => (
 				<span className="absolute left-2 flex size-4 items-center justify-center">
 					{renderProps.isSelected && (
 						<>
-							{renderProps.selectionMode == "single" && (
+							{renderProps.selectionMode === "single" && (
 								<DotFilledIcon className="size-4 fill-current" />
 							)}
-							{renderProps.selectionMode == "multiple" && (
+							{renderProps.selectionMode === "multiple" && (
 								<CheckIcon className="size-4" />
 							)}
 						</>
