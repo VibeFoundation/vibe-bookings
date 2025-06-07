@@ -1,6 +1,0 @@
-[functions]
-  directory = 'apps/server'
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200

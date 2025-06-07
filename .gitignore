@@ -4,7 +4,27 @@ node_modules
 .moon/cache
 .moon/docker
 dist
-.env
 
 # Local Netlify folder
 .netlify
+
+.output
+.vercel
+.netlify
+.vinxi
+app.config.timestamp_*.js
+
+# Environment
+.env
+.env*.local
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+*.launch
+.settings/
+
+# System Files
+.DS_Store
+Thumbs.db
