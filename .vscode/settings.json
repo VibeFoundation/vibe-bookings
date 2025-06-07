@@ -1,3 +1,9 @@
 {
-  "tailwindCSS.classFunctions": ["cva", "cx"]
+	"tailwindCSS.classFunctions": ["cva", "cx"],
+	"files.associations": {
+		"*.css": "tailwindcss"
+	},
+	"editor.quickSuggestions": {
+		"strings": "on"
+	}
 }

@@ -1,6 +1,9 @@
 [language-server]
 biome = { command = "biome", args = ["lsp-proxy"] }
 
+[language-server.tailwindcss-ls.config]
+classFunctions = ["cva", "cn"]
+
 [[language]]
 name = "javascript"
 language-servers = [
