@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vinxi dev",
     "start": "vinxi start",
-    "build": "vinxi build",
+    "build": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide && vinxi build",
     "serve": "vite preview",
     "test": "vitest run",
     "format": "biome format",
@@ -52,6 +52,7 @@
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
     "vitest": "^3.2.2",
-    "web-vitals": "^5.0.2"
+    "web-vitals": "^5.0.2",
+    "@inlang/paraglide-js": "2.1.0"
   }
 }
