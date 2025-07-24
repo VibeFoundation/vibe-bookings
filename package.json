@@ -10,7 +10,8 @@
     "test": "vitest run",
     "format": "biome format",
     "lint": "biome lint",
-    "check": "biome check"
+    "check": "biome check",
+    "machine-translate": "inlang machine translate --project project.inlang"
   },
   "dependencies": {
     "@faker-js/faker": "^9.9.0",
@@ -51,6 +52,8 @@
     "vite": "6",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4",
-    "web-vitals": "^5.0.3"
+    "web-vitals": "^5.0.3",
+    "@inlang/paraglide-js": "2.2.0",
+    "@inlang/cli": "^3.0.0"
   }
 }
