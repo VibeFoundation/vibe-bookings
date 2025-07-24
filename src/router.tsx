@@ -1,7 +1,11 @@
-import { createRouter as createTanstackRouter } from "@tanstack/react-router";
+import {
+	createRouter as createTanstackRouter,
+	type NavigateOptions,
+	type ToOptions,
+} from "@tanstack/react-router";
 import { routerWithQueryClient } from "@tanstack/react-router-with-query";
+import type {} from "react-aria-components";
 import * as TanstackQuery from "./integrations/tanstack-query/root-provider";
-
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 
@@ -28,5 +32,12 @@ export const createRouter = () => {
 declare module "@tanstack/react-router" {
 	interface Register {
 		router: ReturnType<typeof createRouter>;
+	}
+}
+
+declare module "react-aria-components" {
+	interface RouterConfig {
+		href: ToOptions;
+		routerOptions: Omit<NavigateOptions, keyof ToOptions>;
 	}
 }

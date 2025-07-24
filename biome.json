@@ -1,5 +1,5 @@
 {
-	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
 	"vcs": {
 		"enabled": false,
 		"clientKind": "git",
@@ -8,7 +8,7 @@
 	"files": {
 		"ignoreUnknown": false,
 		"includes": [
-			"src/**/*",
+			"src/*",
 			".vscode/*",
 			"index.html",
 			"vite.config.js",
@@ -17,15 +17,11 @@
 	},
 	"formatter": {
 		"enabled": true,
-		"indentStyle": "tab"
+		"indentStyle": "tab",
+		"lineEnding": "lf"
 	},
 	"linter": {
 		"enabled": true,
-		"domains": {
-			"project": "recommended",
-			"react": "recommended",
-			"test": "recommended"
-		},
 		"rules": {
 			"recommended": true
 		}

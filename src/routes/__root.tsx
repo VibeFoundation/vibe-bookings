@@ -3,8 +3,6 @@ import {
 	HeadContent,
 	Scripts,
 	createRootRouteWithContext,
-	type ToOptions,
-	type NavigateOptions,
 	useRouter,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
@@ -16,15 +14,9 @@ import TanStackQueryLayout from "../integrations/tanstack-query/layout.tsx";
 import appCss from "../styles.css?url";
 
 import type { QueryClient } from "@tanstack/react-query";
-
 import { RouterProvider } from "react-aria-components";
+import { ThemeProvider } from "@/providers/theme-provider.tsx";
 
-declare module "react-aria-components" {
-	interface RouterConfig {
-		href: ToOptions;
-		routerOptions: Omit<NavigateOptions, keyof ToOptions>;
-	}
-}
 interface MyRouterContext {
 	queryClient: QueryClient;
 }
@@ -51,25 +43,31 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 		],
 	}),
 
-	component: () => {
-		const router = useRouter();
-		return (
-			<RootDocument>
-				<RouterProvider
-					navigate={(href, opts) => router.navigate({ ...href, ...opts })}
-					useHref={(href) => router.buildLocation(href).href}
-				>
-					<Header />
-
-					<Outlet />
-					<TanStackRouterDevtools />
-
-					<TanStackQueryLayout />
-				</RouterProvider>
-			</RootDocument>
-		);
-	},
+	component: () => (
+		<RootDocument>
+			<RootComponent />
+		</RootDocument>
+	),
 });
+
+function RootComponent() {
+	const router = useRouter();
+
+	return (
+		<ThemeProvider>
+			<RouterProvider
+				navigate={(href, opts) => router.navigate({ ...href, ...opts })}
+				useHref={(href) => router.buildLocation(href).href}
+			>
+				<Header />
+				<Outlet />
+				<TanStackRouterDevtools />
+
+				<TanStackQueryLayout />
+			</RouterProvider>
+		</ThemeProvider>
+	);
+}
 
 function RootDocument({ children }: { children: React.ReactNode }) {
 	return (

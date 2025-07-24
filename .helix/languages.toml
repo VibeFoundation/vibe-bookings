@@ -2,87 +2,96 @@
 biome = { command = "biome", args = ["lsp-proxy"] }
 
 [language-server.tailwindcss-ls.config.tailwindCSS]
-classFunctions = ["cva", "cn", "tw", "clsx"]
-
-[[language]]
-name = "javascript"
-language-servers = [
-  { name = "typescript-language-server", except-features = [
-    "format",
-  ] },
-  "biome",
-]
-formatter = { command = "biome", args = [
-  "format",
-  "--stdin-file-path",
-  "src/buffer.js",
-] }
-auto-format = true
-
-[[language]]
-name = "typescript"
-language-servers = [
-  { name = "typescript-language-server", except-features = [
-    "format",
-  ] },
-  "biome",
-]
-formatter = { command = "biome", args = [
-  "format",
-  "--stdin-file-path",
-  "src/buffer.ts",
-] }
-auto-format = true
-
-[[language]]
-name = "tsx"
-language-servers = [
-  { name = "typescript-language-server", except-features = [
-    "format",
-  ] },
-  "biome",
-  "tailwindcss-ls",
-]
-formatter = { command = "biome", args = [
-  "format",
-  "--stdin-file-path",
-  "src/buffer.tsx",
-] }
-auto-format = true
-
-[[language]]
-name = "jsx"
-language-servers = [
-  { name = "typescript-language-server", except-features = [
-    "format",
-  ] },
-  "biome",
-  "tailwindcss-ls",
-]
-formatter = { command = "biome", args = [
-  "format",
-  "--stdin-file-path",
-  "src/buffer.tsx",
-] }
-auto-format = true
+classFunctions = ["cva", "cn", "tw", "clsx", "class", "sortCx"]
 
 [[language]]
 name = "json"
 language-servers = [
-  { name = "vscode-json-language-server", except-features = [
-    "format",
-  ] },
-  "biome",
+    { name = "vscode-json-language-server", except-features = [
+        "format",
+    ] },
+    "biome",
 ]
 formatter = { command = "biome", args = [
-  "format",
-  "--stdin-file-path",
-  "src/buffer.json",
+    "format",
+    "--stdin-file-path=src/buffer.json",
 ] }
-auto-format = true
-
 [[language]]
 name = "jsonc"
-language-servers = [ { name = "vscode-jsonc-language-server", except-features = [ "format" ] }, "biome" ]
-formatter = { command = "biome", args = ["format", "--stdin-file-path", "src/buffer.jsonc"] }
-auto-format = true
+formatter = { command = "biome", args = [
+    "format",
+    "--stdin-file-path=src/buffer.jsonc",
+] }
+
+[[language]]
+name = "css"
+language-servers = [
+    "vscode-css-language-server",
+    "tailwindcss-ls",
+    "codebook-ls",
+    "biome",
+]
+formatter = { command = "biome", args = [
+    "format",
+    "--stdin-file-path=src/buffer.css",
+] }
+
+[[language]]
+name = "jsx"
+language-servers = [
+    { name = "typescript-language-server", except-features = [
+        "format",
+    ] },
+    "tailwindcss-ls",
+    "codebook-ls",
+    "biome",
+]
+formatter = { command = "biome", args = [
+    "format",
+    "--stdin-file-path=src/buffer.jsx",
+] }
+
+[[language]]
+name = "tsx"
+language-servers = [
+    { name = "typescript-language-server", except-features = [
+        "format",
+    ] },
+    "tailwindcss-ls",
+    "codebook-ls",
+    "biome",
+]
+formatter = { command = "biome", args = [
+    "format",
+    "--stdin-file-path=src/buffer.tsx",
+] }
+
+[[language]]
+name = "typescript"
+language-servers = [
+    { name = "typescript-language-server", except-features = [
+        "format",
+    ] },
+    "tailwindcss-ls",
+    "codebook-ls",
+    "biome",
+]
+formatter = { command = "biome", args = [
+    "format",
+    "--stdin-file-path=src/buffer.ts",
+] }
+
+[[language]]
+name = "javascript"
+language-servers = [
+    { name = "typescript-language-server", except-features = [
+        "format",
+    ] },
+    "tailwindcss-ls",
+    "codebook-ls",
+    "biome",
+]
+formatter = { command = "biome", args = [
+    "format",
+    "--stdin-file-path=src/buffer.js",
+] }
