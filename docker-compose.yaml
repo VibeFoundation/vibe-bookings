@@ -6,7 +6,7 @@ services:
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: electric
+      POSTGRES_DB: nobatki
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     ports:
