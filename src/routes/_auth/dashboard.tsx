@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { createFileRoute, Link, linkOptions, Outlet } from "@tanstack/react-router";
+import {
+	createFileRoute,
+	Link,
+	linkOptions,
+	Outlet,
+} from "@tanstack/react-router";
 import { auth } from "../../lib/auth";
 import {
 	MenuIcon,
@@ -33,11 +38,19 @@ function AdminPanelComponent() {
 			<nav className="flex-1 px-4 py-6 space-y-2">
 				{[
 					{ icon: <DashboardIcon />, label: "داشبورد", active: true },
-					{ icon: <AppointmentsIcon />, label: "نوبت‌ها", to: linkOptions({to: '/dashboard/bookedAppointments'}).to },
+					{
+						icon: <AppointmentsIcon />,
+						label: "نوبت‌ها",
+						to: linkOptions({ to: "/dashboard/bookedAppointments" }).to,
+					},
 					{ icon: <ClientsIcon />, label: "مشتریان", to: "/dashboard/clients" },
 					{ icon: <ServicesIcon />, label: "خدمات", to: "/dashboard/services" },
 					{ icon: <StaffIcon />, label: "کارکنان", to: "/dashboard/staff" },
-					{ icon: <SettingsIcon />, label: "تنظیمات", to: "/dashboard/settings" },
+					{
+						icon: <SettingsIcon />,
+						label: "تنظیمات",
+						to: "/dashboard/settings",
+					},
 				].map((item) => (
 					<Link
 						key={item.label}
