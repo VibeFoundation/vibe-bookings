@@ -1,5 +1,6 @@
 import { drizzle } from "drizzle-orm/bun-sql";
-import { serverEnv } from "./server-env";
 import * as Schema from "./schema";
+import { serverEnv } from "./server-env";
 
-export const db = drizzle(serverEnv.DATABASE_URL, { schema: Schema });
+const { S: _, ..._Schema } = Schema;
+export const db = drizzle(serverEnv.DATABASE_URL, { schema: _Schema });
