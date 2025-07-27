@@ -1,10 +1,11 @@
 import { useForm } from "@tanstack/react-form";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { z } from "zod";
+import * as v from "valibot";
 import { Button } from "@/components/base/buttons/button";
 import { InputBase } from "@/components/base/input/input";
 import { InputGroup } from "@/components/base/input/input-group";
 import { authClient } from "@/lib/auth-client";
+import { m } from "@/paraglide/messages";
 
 export const Route = createFileRoute("/login")({
 	component: Login,
@@ -17,22 +18,25 @@ function Login() {
 			phoneNumber: "",
 		},
 		onSubmit: async ({ value }) => {
-			// In a real app, you'd call an API to send the code
-			console.log("Sending code to:", value.phoneNumber);
-			authClient.phoneNumber.sendOtp({ phoneNumber: value.phoneNumber });
+			const optResult = await authClient.phoneNumber.sendOtp({
+				phoneNumber: value.phoneNumber,
+			});
+
+			if (optResult.error) {
+				console.error("Sending OTP failed");
+				return;
+			}
+
 			navigate({
 				to: "/verify",
 				search: { phone: value.phoneNumber },
 			});
 		},
 		validators: {
-			onChange: z.object({
-				phoneNumber: z
-					.string()
-					.regex(/^(\+98|0)?9\d{9}$/, "شماره صحیح وارد کن"),
-			}),
+			onChange: LoginSchema,
 		},
 	});
+
 	return (
 		<div
 			className="flex flex-col items-center p-0 justify-center min-h-screen  md:p-4"
@@ -41,7 +45,9 @@ function Login() {
 			<div className="w-full max-w-md bg-white p-5 md:p-10 rounded-2xl md:shadow-sm md:border border-gray-200">
 				<div className="flex justify-center mb-8"></div>
 				<div className="text-center flex flex-col items-center gap-4 pb-8">
-					<h2 className="text-2xl font-bold text-gray-800">ورود | ثبت‌نام</h2>
+					<h2 className="text-2xl font-bold text-gray-800">
+						{m.login_page_title()}
+					</h2>
 					<p className="text-gray-500 text-sm">
 						برای دریافت کد تایید، شماره موبایل خود را وارد کنید.
 					</p>
@@ -101,3 +107,10 @@ function Login() {
 		</div>
 	);
 }
+
+const LoginSchema = v.object({
+	phoneNumber: v.pipe(
+		v.string(),
+		v.regex(/^(\+98|0)?9\d{9}$/, m.login_page_phone_number_error()),
+	),
+});

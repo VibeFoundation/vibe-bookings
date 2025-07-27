@@ -1,4 +1,6 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"example_message": "سلام کاربر {username}"
+	"example_message": "سلام کاربر {username}",
+	"login_page_phone_number_error": "شماره وارد شده صحیح نمی باشد",
+	"login_page_title": "ورود | ثبت‌نام"
 }

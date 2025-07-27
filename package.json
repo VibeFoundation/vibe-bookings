@@ -4,7 +4,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "bun --bun vite dev --port 3002",
-		"start": "node .output/server/index.mjs",
+		"start": "bun .output/server/index.mjs",
 		"build": "vite build",
 		"serve": "vite preview",
 		"test": "vitest run",

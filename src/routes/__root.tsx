@@ -7,11 +7,13 @@ import {
 	useRouter,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import { RouterProvider } from "react-aria-components";
+import { I18nProvider, RouterProvider, useLocale } from "react-aria-components";
 import { ThemeProvider } from "@/providers/theme-provider.tsx";
 import Header from "../components/Header";
 import TanStackQueryLayout from "../integrations/tanstack-query/layout.tsx";
 import appCss from "../styles.css?url";
+import { overwriteGetLocale, type Locale } from "@/paraglide/runtime.js";
+import { useEffect } from "react";
 
 interface MyRouterContext {
 	queryClient: QueryClient;
@@ -40,9 +42,11 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 	}),
 
 	component: () => (
-		<RootDocument>
-			<RootComponent />
-		</RootDocument>
+		<I18nProvider locale="fa">
+			<RootDocument>
+				<RootComponent />
+			</RootDocument>
+		</I18nProvider>
 	),
 });
 
@@ -66,8 +70,21 @@ function RootComponent() {
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+	const { locale, direction } = useLocale();
+	console.log(locale);
+
+	useEffect(() => {
+		overwriteGetLocale(() => {
+			if (SUPPORTED_LOCALE.has(locale as "en")) {
+				return locale as "en";
+			}
+
+			return "en";
+		});
+	}, [locale]);
+
 	return (
-		<html lang="en">
+		<html lang={locale} dir={direction}>
 			<head>
 				<HeadContent />
 			</head>
@@ -78,3 +95,5 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 		</html>
 	);
 }
+
+const SUPPORTED_LOCALE = new Set<Locale>(["en", "fa"]);
