@@ -15,7 +15,8 @@
 		"auth-generate": "bun --bun x @better-auth/cli generate",
 		"db-start": "docker compose up --detach",
 		"db-push": "bun drizzle-kit push",
-		"db-generate": "bun drizzle-kit generate"
+		"db-generate": "bun drizzle-kit generate",
+		"prepare": "husky"
 	},
 	"dependencies": {
 		"@faker-js/faker": "^9.9.0",
@@ -61,6 +62,7 @@
 		"@types/react-dom": "^19.1.6",
 		"@vitejs/plugin-react": "^4.7.0",
 		"drizzle-kit": "^0.31.4",
+		"husky": "^9.1.7",
 		"jsdom": "^26.1.0",
 		"postcss": "^8.5.6",
 		"postgres": "^3.4.7",

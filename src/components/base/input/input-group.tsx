@@ -1,4 +1,4 @@
-import { type HTMLAttributes, type ReactNode } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
 import { HintText } from "@/components/base/input/hint-text";
 import type { InputBaseProps } from "@/components/base/input/input";
 import { TextField } from "@/components/base/input/input";

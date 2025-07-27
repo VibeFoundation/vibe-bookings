@@ -78,10 +78,10 @@ const Group = ({
 			size={width}
 			maxLength={maxLength}
 			disabled={disabled}
-			id={"pin-input-" + id}
+			id={`pin-input-${id}`}
 			aria-label="Enter your pin"
-			aria-labelledby={"pin-input-label-" + id}
-			aria-describedby={"pin-input-description-" + id}
+			aria-labelledby={`pin-input-label-${id}`}
+			aria-describedby={`pin-input-description-${id}`}
 			containerClassName={cx(
 				"flex flex-row gap-3",
 				size === "sm" && "gap-2",
@@ -112,7 +112,7 @@ const Slot = ({
 	return (
 		<div
 			{...props}
-			aria-label={"Enter digit " + (index + 1) + " of " + slots.length}
+			aria-label={`Enter digit ${index + 1} of ${slots.length}`}
 			className={cx(
 				"relative flex items-center justify-center rounded-xl bg-primary text-center text-placeholder_subtle shadow-xs ring-1 ring-primary transition-[box-shadow,background-color] duration-100 ease-linear ring-inset",
 				sizes[size],
@@ -171,8 +171,8 @@ const Label = ({ className, ...props }: ComponentPropsWithRef<"label">) => {
 	return (
 		<label
 			{...props}
-			htmlFor={"pin-input-" + id}
-			id={"pin-input-label-" + id}
+			htmlFor={`pin-input-${id}`}
+			id={`pin-input-label-${id}`}
 			className={cx("text-sm font-medium text-secondary", className)}
 		/>
 	);
@@ -185,8 +185,7 @@ const Description = ({ className, ...props }: ComponentPropsWithRef<"p">) => {
 	return (
 		<p
 			{...props}
-			id={"pin-input-description-" + id}
-			role="description"
+			id={`pin-input-description-${id}`}
 			className={cx("text-sm text-tertiary", className)}
 		/>
 	);

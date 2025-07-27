@@ -181,7 +181,7 @@ export const Route = createFileRoute("/_auth/dashboard/bookedAppointments")({
 });
 
 function BookedAppointments() {
-	const [appointments, setAppointments] =
+	const [appointments, _setAppointments] =
 		useState<Appointment[]>(mockAppointments);
 	const [searchTerm, setSearchTerm] = useState("");
 
