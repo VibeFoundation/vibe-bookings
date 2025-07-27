@@ -23,8 +23,7 @@
 		"noUncheckedSideEffectImports": true,
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["./src/*"],
-			"@lib/*": ["./src/lib/*"]
+			"@/*": ["./src/*"]
 		}
 	}
 }

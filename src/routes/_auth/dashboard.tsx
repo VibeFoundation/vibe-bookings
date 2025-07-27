@@ -5,6 +5,7 @@ import {
 	Outlet,
 } from "@tanstack/react-router";
 import { useState } from "react";
+import { authClient } from "@/lib/auth-client";
 import {
 	AppointmentsIcon,
 	ClientsIcon,
@@ -15,7 +16,6 @@ import {
 	SettingsIcon,
 	StaffIcon,
 } from "../../components/icons/icons";
-import { auth } from "../../lib/auth";
 
 export const Route = createFileRoute("/_auth/dashboard")({
 	component: AdminPanelComponent,
@@ -26,7 +26,7 @@ function AdminPanelComponent() {
 	const [isSidebarOpen, setSidebarOpen] = useState(false);
 
 	const handleLogout = () => {
-		auth.logout();
+		authClient.signOut();
 		navigate({ to: "/login" });
 	};
 
@@ -40,7 +40,7 @@ function AdminPanelComponent() {
 					{ icon: <DashboardIcon />, label: "داشبورد", active: true },
 					{
 						icon: <AppointmentsIcon />,
-						label: "نوبت‌ها",
+						label: "نوبتها",
 						to: linkOptions({ to: "/dashboard/bookedAppointments" }).to,
 					},
 					{ icon: <ClientsIcon />, label: "مشتریان", to: "/dashboard/clients" },
