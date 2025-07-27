@@ -1,21 +1,21 @@
-import { useState } from "react";
 import {
 	createFileRoute,
 	Link,
 	linkOptions,
 	Outlet,
 } from "@tanstack/react-router";
-import { auth } from "../../lib/auth";
+import { useState } from "react";
 import {
-	MenuIcon,
-	DashboardIcon,
 	AppointmentsIcon,
 	ClientsIcon,
-	ServicesIcon,
-	StaffIcon,
-	SettingsIcon,
+	DashboardIcon,
 	LogoutIcon,
+	MenuIcon,
+	ServicesIcon,
+	SettingsIcon,
+	StaffIcon,
 } from "../../components/icons/icons";
+import { auth } from "../../lib/auth";
 
 export const Route = createFileRoute("/_auth/dashboard")({
 	component: AdminPanelComponent,

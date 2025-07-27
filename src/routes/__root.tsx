@@ -1,21 +1,17 @@
+import type { QueryClient } from "@tanstack/react-query";
 import {
-	Outlet,
-	HeadContent,
-	Scripts,
 	createRootRouteWithContext,
+	HeadContent,
+	Outlet,
+	Scripts,
 	useRouter,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-
-import Header from "../components/Header";
-
-import TanStackQueryLayout from "../integrations/tanstack-query/layout.tsx";
-
-import appCss from "../styles.css?url";
-
-import type { QueryClient } from "@tanstack/react-query";
 import { RouterProvider } from "react-aria-components";
 import { ThemeProvider } from "@/providers/theme-provider.tsx";
+import Header from "../components/Header";
+import TanStackQueryLayout from "../integrations/tanstack-query/layout.tsx";
+import appCss from "../styles.css?url";
 
 interface MyRouterContext {
 	queryClient: QueryClient;

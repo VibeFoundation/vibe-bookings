@@ -8,9 +8,9 @@
 		"build": "vite build",
 		"serve": "vite preview",
 		"test": "vitest run",
-		"format": "biome format --fix",
-		"lint": "biome lint --fix",
-		"check": "biome check",
+		"format": "biome format --write",
+		"lint": "biome lint --write",
+		"check": "biome check --write",
 		"machine-translate": "inlang machine translate --project project.inlang",
 		"auth-generate": "bun --bun x @better-auth/cli generate",
 		"db-start": "docker compose up --detach",
@@ -75,12 +75,7 @@
 	},
 	"lint-staged": {
 		"*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
-			"biome check --files-ignore-unknown=true",
-			"biome check --write --no-errors-on-unmatched",
-			"biome check --write --organize-imports-enabled=false --no-errors-on-unmatched",
-			"biome check --write --unsafe --no-errors-on-unmatched",
-			"biome format --write --no-errors-on-unmatched",
-			"biome lint --write --no-errors-on-unmatched"
+			"biome format --write --no-errors-on-unmatched"
 		]
 	}
 }

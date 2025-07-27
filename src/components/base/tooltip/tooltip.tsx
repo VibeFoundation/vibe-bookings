@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
 import type { Placement } from "@react-types/overlays";
+import type { ReactNode } from "react";
 import type {
 	ButtonProps as AriaButtonProps,
 	TooltipProps as AriaTooltipProps,

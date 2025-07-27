@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
 import type { SVGProps } from "react";
+import { useState } from "react";
 
 // === TYPESCRIPT INTERFACES ===
 interface Appointment {
