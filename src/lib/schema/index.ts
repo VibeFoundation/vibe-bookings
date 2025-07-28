@@ -1,4 +1,2 @@
-export * from "./relations";
-export * from "./schema";
-
+export * as R from "./relations";
 export * as S from "./schema";
