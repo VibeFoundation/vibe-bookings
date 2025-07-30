@@ -1,4 +1,4 @@
-name: "database-setup"
+name: "dbs"
 
 services:
   postgres:
