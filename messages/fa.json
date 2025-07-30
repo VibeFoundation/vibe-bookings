@@ -2,5 +2,18 @@
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"example_message": "سلام کاربر {username}",
 	"login_page_phone_number_error": "شماره وارد شده صحیح نمی باشد",
-	"login_page_title": "ورود | ثبت‌نام"
+	"login_page_title": "ورود | ثبت‌نام",
+	"login_page_example_phone_number": "مثال: 09123456789",
+	"login_page_send_code": "ارسال کد",
+	"login_page_sending": "در حال ارسال",
+	"login_phone_number": "شماره موبایل",
+	"login_page_description": "برای دریافت کد تایید، شماره موبایل خود را وارد کنید.",
+	"verify_page_code_error": "کد باید ۶ رقم باشد.",
+	"verify_page_title": "کد تایید را وارد کنید",
+	"verify_page_code_sended": "کد به شماره {phoneNumber} ارسال شد.",
+	"verify_page_resend_code": "ارسال مجدد کد",
+	"verify_page_confirm": "تایید",
+	"verify_page_in_review": "در حال برسی",
+	"verify_page_resend_code_to": "ارسال مجدد کد تا 00:",
+	"verify_page_wrong_otp": "کد اشتباه بود"
 }

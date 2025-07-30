@@ -7,13 +7,12 @@ import {
 	useRouter,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import { useEffect } from "react";
 import { I18nProvider, RouterProvider, useLocale } from "react-aria-components";
+import { type Locale, overwriteGetLocale } from "@/paraglide/runtime.js";
 import { ThemeProvider } from "@/providers/theme-provider.tsx";
-import Header from "../components/Header";
 import TanStackQueryLayout from "../integrations/tanstack-query/layout.tsx";
 import appCss from "../styles.css?url";
-import { overwriteGetLocale, type Locale } from "@/paraglide/runtime.js";
-import { useEffect } from "react";
 
 interface MyRouterContext {
 	queryClient: QueryClient;
@@ -59,7 +58,6 @@ function RootComponent() {
 				navigate={(href, opts) => router.navigate({ ...href, ...opts })}
 				useHref={(href) => router.buildLocation(href).href}
 			>
-				<Header />
 				<Outlet />
 				<TanStackRouterDevtools />
 

@@ -48,9 +48,7 @@ function Login() {
 					<h2 className="text-2xl font-bold text-gray-800">
 						{m.login_page_title()}
 					</h2>
-					<p className="text-gray-500 text-sm">
-						برای دریافت کد تایید، شماره موبایل خود را وارد کنید.
-					</p>
+					<p className="text-gray-500 text-sm">{m.login_page_description()}</p>
 					<img
 						src="src/assets/icons/edited-image.png"
 						alt="brand-logo"
@@ -71,7 +69,7 @@ function Login() {
 						children={(field) => (
 							<div className="mb-4">
 								<label htmlFor={field.name} className="sr-only">
-									شماره موبایل
+									{m.login_phone_number()}
 								</label>
 								<InputGroup
 									isRequired
@@ -82,7 +80,10 @@ function Login() {
 									onChange={field.handleChange}
 									isInvalid={!!field.state.meta.errors?.length}
 								>
-									<InputBase type="tel" placeholder="مثال: 09123456789" />
+									<InputBase
+										type="tel"
+										placeholder={m.login_page_example_phone_number()}
+									/>
 								</InputGroup>
 							</div>
 						)}
@@ -98,7 +99,9 @@ function Login() {
 								type="submit"
 								disabled={!canSubmit || isSubmitting}
 							>
-								{isSubmitting ? "در حال ارسال..." : "ارسال کد"}
+								{isSubmitting
+									? m.login_page_sending()
+									: m.login_page_send_code()}
 							</Button>
 						)}
 					/>

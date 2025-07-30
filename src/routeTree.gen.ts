@@ -15,15 +15,8 @@ import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as DemoTanstackQueryRouteImport } from './routes/demo.tanstack-query'
-import { Route as DemoTableRouteImport } from './routes/demo.table'
 import { Route as AuthDashboardRouteImport } from './routes/_auth/dashboard'
 import { Route as AuthDashboardIndexRouteImport } from './routes/_auth/dashboard/index'
-import { Route as DemoStartServerFuncsRouteImport } from './routes/demo.start.server-funcs'
-import { Route as DemoStartApiRequestRouteImport } from './routes/demo.start.api-request'
-import { Route as DemoSentryTestingRouteImport } from './routes/demo.sentry.testing'
-import { Route as DemoFormSimpleRouteImport } from './routes/demo.form.simple'
-import { Route as DemoFormAddressRouteImport } from './routes/demo.form.address'
 import { Route as AuthDashboardBookedAppointmentsRouteImport } from './routes/_auth/dashboard/bookedAppointments'
 import { ServerRoute as ApiDemoNamesServerRouteImport } from './routes/api.demo-names'
 import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth/$'
@@ -49,16 +42,6 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
-  id: '/demo/tanstack-query',
-  path: '/demo/tanstack-query',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoTableRoute = DemoTableRouteImport.update({
-  id: '/demo/table',
-  path: '/demo/table',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthDashboardRoute = AuthDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -68,31 +51,6 @@ const AuthDashboardIndexRoute = AuthDashboardIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthDashboardRoute,
-} as any)
-const DemoStartServerFuncsRoute = DemoStartServerFuncsRouteImport.update({
-  id: '/demo/start/server-funcs',
-  path: '/demo/start/server-funcs',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoStartApiRequestRoute = DemoStartApiRequestRouteImport.update({
-  id: '/demo/start/api-request',
-  path: '/demo/start/api-request',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoSentryTestingRoute = DemoSentryTestingRouteImport.update({
-  id: '/demo/sentry/testing',
-  path: '/demo/sentry/testing',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoFormSimpleRoute = DemoFormSimpleRouteImport.update({
-  id: '/demo/form/simple',
-  path: '/demo/form/simple',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoFormAddressRoute = DemoFormAddressRouteImport.update({
-  id: '/demo/form/address',
-  path: '/demo/form/address',
-  getParentRoute: () => rootRouteImport,
 } as any)
 const AuthDashboardBookedAppointmentsRoute =
   AuthDashboardBookedAppointmentsRouteImport.update({
@@ -116,28 +74,14 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/verify': typeof VerifyRoute
   '/dashboard': typeof AuthDashboardRouteWithChildren
-  '/demo/table': typeof DemoTableRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/dashboard/bookedAppointments': typeof AuthDashboardBookedAppointmentsRoute
-  '/demo/form/address': typeof DemoFormAddressRoute
-  '/demo/form/simple': typeof DemoFormSimpleRoute
-  '/demo/sentry/testing': typeof DemoSentryTestingRoute
-  '/demo/start/api-request': typeof DemoStartApiRequestRoute
-  '/demo/start/server-funcs': typeof DemoStartServerFuncsRoute
   '/dashboard/': typeof AuthDashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/verify': typeof VerifyRoute
-  '/demo/table': typeof DemoTableRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/dashboard/bookedAppointments': typeof AuthDashboardBookedAppointmentsRoute
-  '/demo/form/address': typeof DemoFormAddressRoute
-  '/demo/form/simple': typeof DemoFormSimpleRoute
-  '/demo/sentry/testing': typeof DemoSentryTestingRoute
-  '/demo/start/api-request': typeof DemoStartApiRequestRoute
-  '/demo/start/server-funcs': typeof DemoStartServerFuncsRoute
   '/dashboard': typeof AuthDashboardIndexRoute
 }
 export interface FileRoutesById {
@@ -147,14 +91,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/verify': typeof VerifyRoute
   '/_auth/dashboard': typeof AuthDashboardRouteWithChildren
-  '/demo/table': typeof DemoTableRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/_auth/dashboard/bookedAppointments': typeof AuthDashboardBookedAppointmentsRoute
-  '/demo/form/address': typeof DemoFormAddressRoute
-  '/demo/form/simple': typeof DemoFormSimpleRoute
-  '/demo/sentry/testing': typeof DemoSentryTestingRoute
-  '/demo/start/api-request': typeof DemoStartApiRequestRoute
-  '/demo/start/server-funcs': typeof DemoStartServerFuncsRoute
   '/_auth/dashboard/': typeof AuthDashboardIndexRoute
 }
 export interface FileRouteTypes {
@@ -164,28 +101,14 @@ export interface FileRouteTypes {
     | '/login'
     | '/verify'
     | '/dashboard'
-    | '/demo/table'
-    | '/demo/tanstack-query'
     | '/dashboard/bookedAppointments'
-    | '/demo/form/address'
-    | '/demo/form/simple'
-    | '/demo/sentry/testing'
-    | '/demo/start/api-request'
-    | '/demo/start/server-funcs'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/login'
     | '/verify'
-    | '/demo/table'
-    | '/demo/tanstack-query'
     | '/dashboard/bookedAppointments'
-    | '/demo/form/address'
-    | '/demo/form/simple'
-    | '/demo/sentry/testing'
-    | '/demo/start/api-request'
-    | '/demo/start/server-funcs'
     | '/dashboard'
   id:
     | '__root__'
@@ -194,14 +117,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/verify'
     | '/_auth/dashboard'
-    | '/demo/table'
-    | '/demo/tanstack-query'
     | '/_auth/dashboard/bookedAppointments'
-    | '/demo/form/address'
-    | '/demo/form/simple'
-    | '/demo/sentry/testing'
-    | '/demo/start/api-request'
-    | '/demo/start/server-funcs'
     | '/_auth/dashboard/'
   fileRoutesById: FileRoutesById
 }
@@ -210,13 +126,6 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRouteWithChildren
   LoginRoute: typeof LoginRoute
   VerifyRoute: typeof VerifyRoute
-  DemoTableRoute: typeof DemoTableRoute
-  DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
-  DemoFormAddressRoute: typeof DemoFormAddressRoute
-  DemoFormSimpleRoute: typeof DemoFormSimpleRoute
-  DemoSentryTestingRoute: typeof DemoSentryTestingRoute
-  DemoStartApiRequestRoute: typeof DemoStartApiRequestRoute
-  DemoStartServerFuncsRoute: typeof DemoStartServerFuncsRoute
 }
 export interface FileServerRoutesByFullPath {
   '/api/demo-names': typeof ApiDemoNamesServerRoute
@@ -274,20 +183,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/demo/tanstack-query': {
-      id: '/demo/tanstack-query'
-      path: '/demo/tanstack-query'
-      fullPath: '/demo/tanstack-query'
-      preLoaderRoute: typeof DemoTanstackQueryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo/table': {
-      id: '/demo/table'
-      path: '/demo/table'
-      fullPath: '/demo/table'
-      preLoaderRoute: typeof DemoTableRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_auth/dashboard': {
       id: '/_auth/dashboard'
       path: '/dashboard'
@@ -301,41 +196,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard/'
       preLoaderRoute: typeof AuthDashboardIndexRouteImport
       parentRoute: typeof AuthDashboardRoute
-    }
-    '/demo/start/server-funcs': {
-      id: '/demo/start/server-funcs'
-      path: '/demo/start/server-funcs'
-      fullPath: '/demo/start/server-funcs'
-      preLoaderRoute: typeof DemoStartServerFuncsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo/start/api-request': {
-      id: '/demo/start/api-request'
-      path: '/demo/start/api-request'
-      fullPath: '/demo/start/api-request'
-      preLoaderRoute: typeof DemoStartApiRequestRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo/sentry/testing': {
-      id: '/demo/sentry/testing'
-      path: '/demo/sentry/testing'
-      fullPath: '/demo/sentry/testing'
-      preLoaderRoute: typeof DemoSentryTestingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo/form/simple': {
-      id: '/demo/form/simple'
-      path: '/demo/form/simple'
-      fullPath: '/demo/form/simple'
-      preLoaderRoute: typeof DemoFormSimpleRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo/form/address': {
-      id: '/demo/form/address'
-      path: '/demo/form/address'
-      fullPath: '/demo/form/address'
-      preLoaderRoute: typeof DemoFormAddressRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/_auth/dashboard/bookedAppointments': {
       id: '/_auth/dashboard/bookedAppointments'
@@ -394,13 +254,6 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRouteWithChildren,
   LoginRoute: LoginRoute,
   VerifyRoute: VerifyRoute,
-  DemoTableRoute: DemoTableRoute,
-  DemoTanstackQueryRoute: DemoTanstackQueryRoute,
-  DemoFormAddressRoute: DemoFormAddressRoute,
-  DemoFormSimpleRoute: DemoFormSimpleRoute,
-  DemoSentryTestingRoute: DemoSentryTestingRoute,
-  DemoStartApiRequestRoute: DemoStartApiRequestRoute,
-  DemoStartServerFuncsRoute: DemoStartServerFuncsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,10 +1,12 @@
 import { useForm } from "@tanstack/react-form";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState as ReactState, useEffect } from "react";
+import { Toaster, toast } from "sonner";
 import { z } from "zod";
 import { Button } from "@/components/base/buttons/button";
 import { Input } from "@/components/base/input/input";
 import { authClient } from "@/lib/auth-client";
+import { m } from "@/paraglide/messages";
 
 const verifySearchSchema = z.object({
 	phone: z.string().catch(""),
@@ -21,6 +23,10 @@ function VerifyComponent() {
 	const phone = verifySearchSchema.parse(search).phone;
 	const [timer, setTimer] = ReactState(59);
 
+	if (!search.phone) {
+		navigate({ to: "/login" });
+	}
+
 	useEffect(() => {
 		if (timer === 0) return;
 		const intervalId = setInterval(() => setTimer((prev) => prev - 1), 1000);
@@ -32,12 +38,28 @@ function VerifyComponent() {
 			otp: "",
 		},
 		onSubmit: async ({ value }) => {
-			authClient.phoneNumber.verify({ code: value.otp, phoneNumber: phone });
-			navigate({ to: "/dashboard" });
+			const res = await authClient.phoneNumber.verify({
+				code: value.otp,
+				phoneNumber: phone,
+			});
+
+			if (res.data) {
+				navigate({ to: "/dashboard" });
+				return;
+			}
+
+			const errorCode = res.error.code;
+			if (errorCode && errorCode in VERIFY_ERROR_MESSAGE) {
+				toast.error(
+					VERIFY_ERROR_MESSAGE[
+						errorCode as keyof typeof VERIFY_ERROR_MESSAGE
+					](),
+				);
+			}
 		},
 		validators: {
 			onChange: z.object({
-				otp: z.string().min(4, "کد باید ۴ رقم باشد."),
+				otp: z.string().min(6, m.verify_page_code_error()),
 			}),
 		},
 	});
@@ -51,12 +73,11 @@ function VerifyComponent() {
 				<div className="flex justify-center mb-8"></div>
 				<div className="text-center">
 					<h2 className="text-xl font-bold text-gray-800 mb-2">
-						کد تایید را وارد کنید
+						{m.verify_page_title()}
 					</h2>
 					<p className="text-gray-500 text-sm mb-8">
-						کد به شماره{" "}
-						<span className="font-semibold text-gray-800">{phone}</span> ارسال
-						شد.
+						{/* <span className="font-semibold text-gray-800">{phone}</span> */}
+						{m.verify_page_code_sended({ phoneNumber: phone })}
 					</p>
 				</div>
 				<form
@@ -78,7 +99,7 @@ function VerifyComponent() {
 									onBlur={field.handleBlur}
 									onChange={field.handleChange}
 									type="text"
-									maxLength={4}
+									maxLength={6}
 									isInvalid={!field.state.meta.isValid}
 									hint={field.state.meta.errors.at(0)?.message}
 									placeholder="----"
@@ -90,7 +111,8 @@ function VerifyComponent() {
 					<div className="text-center text-sm text-gray-500 mb-6">
 						{timer > 0 ? (
 							<span>
-								ارسال مجدد کد تا 00:{timer < 10 ? "0${timer}" : timer}
+								{m.verify_page_resend_code_to()}
+								{timer < 10 ? "0${timer}" : timer}
 							</span>
 						) : (
 							<button
@@ -98,7 +120,7 @@ function VerifyComponent() {
 								onClick={() => setTimer(59)}
 								className="font-semibold text-purple-500 hover:underline"
 							>
-								ارسال مجدد کد
+								{m.verify_page_resend_code()}
 							</button>
 						)}
 					</div>
@@ -113,12 +135,19 @@ function VerifyComponent() {
 								disabled={!canSubmit || isSubmitting}
 								className="w-full"
 							>
-								{isSubmitting ? "در حال بررسی..." : "تایید"}
+								{isSubmitting
+									? m.verify_page_in_review()
+									: m.verify_page_confirm()}
 							</Button>
 						)}
 					</formVerify.Subscribe>
 				</form>
 			</div>
+			<Toaster richColors position="top-center" />
 		</div>
 	);
 }
+
+const VERIFY_ERROR_MESSAGE = {
+	INVALID_OTP: m.verify_page_wrong_otp,
+};

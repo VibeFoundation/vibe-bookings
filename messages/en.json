@@ -1,6 +1,4 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"example_message": "Hello world {username}",
-	"login_page_phone_number_error": "Phone number is invalid",
-	"login_page_title": "Login | Sign up"
+	"example_message": "Hello world {username}"
 }
