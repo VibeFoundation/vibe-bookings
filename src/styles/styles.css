@@ -22,7 +22,9 @@
 
 @font-face {
 	font-family: Vazirmatn;
-	src: url("../src/assets/fonts/Vazirmatn-Regular.ttf");
+	src:
+		url("public/assets/fonts/Vazirmatn-Regular.woff2") format("woff2"),
+		url("public/assets/fonts/Vazirmatn-Regular.ttf") format("truetype");
 }
 
 @utility transition-inherit-all {

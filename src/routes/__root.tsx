@@ -82,10 +82,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 	const { locale, direction } = useLocale();
 
 	useEffect(() => {
-		if (SUPPORTED_LOCALE.has(locale as "en")) {
-			setLocale(locale as "en");
-		}
-
 		overwriteGetLocale(() => {
 			if (SUPPORTED_LOCALE.has(locale as "en")) {
 				return locale as "en";
@@ -93,6 +89,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 			return "en";
 		});
+
+		if (SUPPORTED_LOCALE.has(locale as "en")) {
+			setLocale(locale as "en");
+		}
 	}, [locale]);
 
 	return (

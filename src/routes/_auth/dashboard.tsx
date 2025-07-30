@@ -76,7 +76,7 @@ function AdminPanelComponent() {
 	);
 
 	return (
-		<div className="flex h-screen bg-gray-50 font-sans" dir="rtl">
+		<div className="flex h-screen bg-gray-50">
 			<aside className="hidden lg:block w-64 bg-white border-l border-gray-200">
 				<SidebarContent />
 			</aside>
