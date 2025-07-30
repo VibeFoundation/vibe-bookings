@@ -9,10 +9,14 @@ import {
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { useEffect } from "react";
 import { I18nProvider, RouterProvider, useLocale } from "react-aria-components";
-import { type Locale, overwriteGetLocale } from "@/paraglide/runtime.js";
+import {
+	type Locale,
+	overwriteGetLocale,
+	setLocale,
+} from "@/paraglide/runtime.js";
 import { ThemeProvider } from "@/providers/theme-provider.tsx";
 import TanStackQueryLayout from "../integrations/tanstack-query/layout.tsx";
-import appCss from "../styles.css?url";
+import appCss from "../styles/styles.css?url";
 
 interface MyRouterContext {
 	queryClient: QueryClient;
@@ -69,9 +73,12 @@ function RootComponent() {
 
 function RootDocument({ children }: { children: React.ReactNode }) {
 	const { locale, direction } = useLocale();
-	console.log(locale);
 
 	useEffect(() => {
+		if (SUPPORTED_LOCALE.has(locale as "en")) {
+			setLocale(locale as "en");
+		}
+
 		overwriteGetLocale(() => {
 			if (SUPPORTED_LOCALE.has(locale as "en")) {
 				return locale as "en";

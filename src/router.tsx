@@ -21,12 +21,17 @@ export const createRouter = () => {
 			},
 			scrollRestoration: true,
 			defaultPreloadStaleTime: 0,
+			defaultNotFoundComponent: NotFound,
 		}),
 		TanstackQuery.getContext().queryClient,
 	);
 
 	return router;
 };
+
+function NotFound() {
+	<div>Not Found</div>;
+}
 
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {
