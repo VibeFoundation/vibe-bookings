@@ -1266,8 +1266,6 @@
 		--color-toggle-slim-border_pressed-hover: var(--color-transparent);
 		--color-toggle-slim-border_pressed: var(--color-transparent);
 		--color-tooltip-supporting-text: var(--color-gray-300);
-		--color-text-editor-icon-fg: var(--color-gray-400);
-		--color-text-editor-icon-fg_active: var(--color-white);
 
 		/* BACKGROUND PROPERTY COLORS */
 		--background-color-quaternary: var(--color-bg-quaternary);
@@ -1289,7 +1287,6 @@
 		--background-color-brand-primary: var(--color-bg-brand-primary);
 		--background-color-brand-primary_alt: var(--color-bg-brand-primary_alt);
 		--background-color-brand-secondary: var(--color-bg-brand-secondary);
-		--background-color-brand-solid: var(--color-bg-brand-solid);
 		--background-color-brand-solid_hover: var(--color-bg-brand-solid_hover);
 		--background-color-brand-section: var(--color-bg-brand-section);
 		--background-color-brand-section_subtle: var(
@@ -1367,12 +1364,15 @@
 		--outline-color-secondary_alt: var(--color-border-secondary_alt);
 		--outline-color-tertiary: var(--color-border-tertiary);
 		--outline-color-disabled: var(--color-border-disabled);
-		--outline-color-brand: var(--color-border-brand);
 		--outline-color-brand-solid: var(--color-bg-brand-solid);
 		--outline-color-brand-solid_hover: var(--color-bg-brand-solid_hover);
 		--outline-color-error: var(--color-border-error);
 		--outline-color-disabled_subtle: var(--color-border-disabled_subtle);
 		--outline-color-brand_alt: var(--color-border-brand_alt);
 		--outline-color-error_subtle: var(--color-border-error_subtle);
+	}
+
+	html[lang="fa"] {
+		--font-body: "Vazirmatn", "Tahoma", "Arial", sans-serif;
 	}
 }

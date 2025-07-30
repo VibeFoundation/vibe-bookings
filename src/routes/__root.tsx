@@ -9,6 +9,7 @@ import {
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { useEffect } from "react";
 import { I18nProvider, RouterProvider, useLocale } from "react-aria-components";
+import { Toaster } from "sonner";
 import {
 	type Locale,
 	overwriteGetLocale,
@@ -63,6 +64,12 @@ function RootComponent() {
 				useHref={(href) => router.buildLocation(href).href}
 			>
 				<Outlet />
+				<Toaster
+					className="font-body"
+					toastOptions={{ className: "font-body" }}
+					richColors
+					position="top-center"
+				/>
 				<TanStackRouterDevtools />
 
 				<TanStackQueryLayout />

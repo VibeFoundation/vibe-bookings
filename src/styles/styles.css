@@ -20,6 +20,11 @@
 	scrollbar-width: none; /* Firefox */
 }
 
+@font-face {
+	font-family: Vazirmatn;
+	src: url("../src/assets/fonts/Vazirmatn-Regular.ttf");
+}
+
 @utility transition-inherit-all {
 	transition-property: inherit;
 	transition-duration: inherit;

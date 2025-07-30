@@ -1,7 +1,7 @@
 import { useForm } from "@tanstack/react-form";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState as ReactState, useEffect } from "react";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import { z } from "zod";
 import { Button } from "@/components/base/buttons/button";
 import { Input } from "@/components/base/input/input";
@@ -143,7 +143,6 @@ function VerifyComponent() {
 					</formVerify.Subscribe>
 				</form>
 			</div>
-			<Toaster richColors position="top-center" />
 		</div>
 	);
 }
