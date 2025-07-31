@@ -8,7 +8,7 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { useEffect } from "react";
-import { I18nProvider, RouterProvider, useLocale } from "react-aria-components";
+import { I18nProvider, useLocale } from "react-aria-components";
 import { Toaster } from "sonner";
 import {
 	type Locale,
@@ -59,21 +59,16 @@ function RootComponent() {
 
 	return (
 		<ThemeProvider>
-			<RouterProvider
-				navigate={(href, opts) => router.navigate({ ...href, ...opts })}
-				useHref={(href) => router.buildLocation(href).href}
-			>
-				<Outlet />
-				<Toaster
-					className="font-body"
-					toastOptions={{ className: "font-body" }}
-					richColors
-					position="top-center"
-				/>
-				<TanStackRouterDevtools />
+			<Outlet />
+			<Toaster
+				className="font-body"
+				toastOptions={{ className: "font-body" }}
+				richColors
+				position="top-center"
+			/>
+			<TanStackRouterDevtools />
 
-				<TanStackQueryLayout />
-			</RouterProvider>
+			<TanStackQueryLayout />
 		</ThemeProvider>
 	);
 }

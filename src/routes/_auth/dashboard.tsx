@@ -24,6 +24,7 @@ export const Route = createFileRoute("/_auth/dashboard")({
 function AdminPanelComponent() {
 	const navigate = Route.useNavigate();
 	const [isSidebarOpen, setSidebarOpen] = useState(false);
+	console.log(authClient.useSession().data?.user);
 
 	const handleLogout = () => {
 		authClient.signOut();

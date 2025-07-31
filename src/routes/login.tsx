@@ -42,19 +42,22 @@ function Login() {
 			className="flex flex-col items-center p-0 justify-center min-h-screen  md:p-4"
 			dir="rtl"
 		>
-			<div className="w-full max-w-md bg-white p-5 md:p-10 rounded-2xl md:shadow-sm md:border border-gray-200">
-				<div className="flex justify-center mb-8"></div>
-				<div className="text-center flex flex-col items-center gap-4 pb-8">
-					<h2 className="text-2xl font-bold text-gray-800">
-						{m.login_page_title()}
-					</h2>
-					<p className="text-gray-500 text-sm">{m.login_page_description()}</p>
+			<div className="w-full max-w-md bg-white p-5 md:p-10 rounded-2xl md:shadow-sm md:border border-gray-200 flex flex-col gap-16">
+				<div className="text-center flex flex-col justify-between gap-24 items-center">
 					<img
-						src="src/assets/icons/edited-image.png"
+						src="public/assets/icons/edited-image.png"
 						alt="brand-logo"
 						width={180}
 						height={180}
 					/>
+					<div>
+						<h2 className="text-2xl font-bold text-gray-800 mb-3">
+							{m.login_page_title()}
+						</h2>
+						<p className="text-gray-500 text-sm">
+							{m.login_page_description()}
+						</p>
+					</div>
 				</div>
 				<form
 					onSubmit={(e) => {

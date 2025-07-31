@@ -1,6 +1,7 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { organization, phoneNumber } from "better-auth/plugins";
+import { OTP_TIMEOUT } from "@/utils/otp-timeout";
 import { db } from "./db";
 
 export const auth = betterAuth({
@@ -16,6 +17,7 @@ export const auth = betterAuth({
 			sendOTP: (opts, _req) => {
 				console.log("SENDING OTP: ", opts);
 			},
+			expiresIn: OTP_TIMEOUT,
 			signUpOnVerification: {
 				getTempEmail: (phoneNumber) => {
 					return `${phoneNumber}@nobatki.com`;

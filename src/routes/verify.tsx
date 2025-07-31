@@ -49,12 +49,19 @@ function VerifyComponent() {
 			}
 
 			const errorCode = res.error.code;
+			console.log(res.error);
+
+			if (errorCode === "OTP_NOT_FOUND") {
+				navigate({ to: "/login" });
+			}
+
 			if (errorCode && errorCode in VERIFY_ERROR_MESSAGE) {
 				toast.error(
 					VERIFY_ERROR_MESSAGE[
 						errorCode as keyof typeof VERIFY_ERROR_MESSAGE
 					](),
 				);
+				console.log(VERIFY_ERROR_MESSAGE.INVALID_OTP.name);
 			}
 		},
 		validators: {
@@ -149,4 +156,7 @@ function VerifyComponent() {
 
 const VERIFY_ERROR_MESSAGE = {
 	INVALID_OTP: m.verify_page_wrong_otp,
+	OTP_EXPIRED: m.verify_page_expired_otp,
 };
+
+authClient.$ERROR_CODES.OTP_EXPIRED;
