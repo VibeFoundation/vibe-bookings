@@ -1,6 +1,7 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { organization, phoneNumber } from "better-auth/plugins";
+import { reactStartCookies } from "better-auth/react-start";
 import { db } from "./db";
 
 export const auth = betterAuth({
@@ -11,6 +12,7 @@ export const auth = betterAuth({
 	emailAndPassword: { enabled: false },
 
 	plugins: [
+		reactStartCookies(),
 		organization(),
 		phoneNumber({
 			sendOTP: (opts, _req) => {
