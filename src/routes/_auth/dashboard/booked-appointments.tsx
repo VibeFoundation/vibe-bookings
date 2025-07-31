@@ -176,7 +176,7 @@ const UserIcon = (props: SVGProps<SVGSVGElement>) => (
 	</svg>
 );
 
-export const Route = createFileRoute("/_auth/dashboard/bookedAppointments")({
+export const Route = createFileRoute("/_auth/dashboard/booked-appointments")({
 	component: BookedAppointments,
 });
 

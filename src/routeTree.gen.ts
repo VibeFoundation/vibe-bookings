@@ -18,8 +18,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthDashboard2RouteImport } from './routes/_auth/dashboard2'
 import { Route as AuthDashboardRouteImport } from './routes/_auth/dashboard'
 import { Route as AuthDashboardIndexRouteImport } from './routes/_auth/dashboard/index'
-import { Route as AuthDashboardBookedAppointmentsRouteImport } from './routes/_auth/dashboard/bookedAppointments'
-import { ServerRoute as ApiDemoNamesServerRouteImport } from './routes/api.demo-names'
+import { Route as AuthDashboardBookedAppointmentsRouteImport } from './routes/_auth/dashboard/booked-appointments'
 import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth/$'
 
 const rootServerRouteImport = createServerRootRoute()
@@ -60,15 +59,10 @@ const AuthDashboardIndexRoute = AuthDashboardIndexRouteImport.update({
 } as any)
 const AuthDashboardBookedAppointmentsRoute =
   AuthDashboardBookedAppointmentsRouteImport.update({
-    id: '/bookedAppointments',
-    path: '/bookedAppointments',
+    id: '/booked-appointments',
+    path: '/booked-appointments',
     getParentRoute: () => AuthDashboardRoute,
   } as any)
-const ApiDemoNamesServerRoute = ApiDemoNamesServerRouteImport.update({
-  id: '/api/demo-names',
-  path: '/api/demo-names',
-  getParentRoute: () => rootServerRouteImport,
-} as any)
 const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -81,7 +75,7 @@ export interface FileRoutesByFullPath {
   '/verify': typeof VerifyRoute
   '/dashboard': typeof AuthDashboardRouteWithChildren
   '/dashboard2': typeof AuthDashboard2Route
-  '/dashboard/bookedAppointments': typeof AuthDashboardBookedAppointmentsRoute
+  '/dashboard/booked-appointments': typeof AuthDashboardBookedAppointmentsRoute
   '/dashboard/': typeof AuthDashboardIndexRoute
 }
 export interface FileRoutesByTo {
@@ -89,7 +83,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/verify': typeof VerifyRoute
   '/dashboard2': typeof AuthDashboard2Route
-  '/dashboard/bookedAppointments': typeof AuthDashboardBookedAppointmentsRoute
+  '/dashboard/booked-appointments': typeof AuthDashboardBookedAppointmentsRoute
   '/dashboard': typeof AuthDashboardIndexRoute
 }
 export interface FileRoutesById {
@@ -100,7 +94,7 @@ export interface FileRoutesById {
   '/verify': typeof VerifyRoute
   '/_auth/dashboard': typeof AuthDashboardRouteWithChildren
   '/_auth/dashboard2': typeof AuthDashboard2Route
-  '/_auth/dashboard/bookedAppointments': typeof AuthDashboardBookedAppointmentsRoute
+  '/_auth/dashboard/booked-appointments': typeof AuthDashboardBookedAppointmentsRoute
   '/_auth/dashboard/': typeof AuthDashboardIndexRoute
 }
 export interface FileRouteTypes {
@@ -111,7 +105,7 @@ export interface FileRouteTypes {
     | '/verify'
     | '/dashboard'
     | '/dashboard2'
-    | '/dashboard/bookedAppointments'
+    | '/dashboard/booked-appointments'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -119,7 +113,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/verify'
     | '/dashboard2'
-    | '/dashboard/bookedAppointments'
+    | '/dashboard/booked-appointments'
     | '/dashboard'
   id:
     | '__root__'
@@ -129,7 +123,7 @@ export interface FileRouteTypes {
     | '/verify'
     | '/_auth/dashboard'
     | '/_auth/dashboard2'
-    | '/_auth/dashboard/bookedAppointments'
+    | '/_auth/dashboard/booked-appointments'
     | '/_auth/dashboard/'
   fileRoutesById: FileRoutesById
 }
@@ -140,28 +134,24 @@ export interface RootRouteChildren {
   VerifyRoute: typeof VerifyRoute
 }
 export interface FileServerRoutesByFullPath {
-  '/api/demo-names': typeof ApiDemoNamesServerRoute
   '/api/auth/$': typeof ApiAuthSplatServerRoute
 }
 export interface FileServerRoutesByTo {
-  '/api/demo-names': typeof ApiDemoNamesServerRoute
   '/api/auth/$': typeof ApiAuthSplatServerRoute
 }
 export interface FileServerRoutesById {
   __root__: typeof rootServerRouteImport
-  '/api/demo-names': typeof ApiDemoNamesServerRoute
   '/api/auth/$': typeof ApiAuthSplatServerRoute
 }
 export interface FileServerRouteTypes {
   fileServerRoutesByFullPath: FileServerRoutesByFullPath
-  fullPaths: '/api/demo-names' | '/api/auth/$'
+  fullPaths: '/api/auth/$'
   fileServerRoutesByTo: FileServerRoutesByTo
-  to: '/api/demo-names' | '/api/auth/$'
-  id: '__root__' | '/api/demo-names' | '/api/auth/$'
+  to: '/api/auth/$'
+  id: '__root__' | '/api/auth/$'
   fileServerRoutesById: FileServerRoutesById
 }
 export interface RootServerRouteChildren {
-  ApiDemoNamesServerRoute: typeof ApiDemoNamesServerRoute
   ApiAuthSplatServerRoute: typeof ApiAuthSplatServerRoute
 }
 
@@ -216,10 +206,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthDashboardIndexRouteImport
       parentRoute: typeof AuthDashboardRoute
     }
-    '/_auth/dashboard/bookedAppointments': {
-      id: '/_auth/dashboard/bookedAppointments'
-      path: '/bookedAppointments'
-      fullPath: '/dashboard/bookedAppointments'
+    '/_auth/dashboard/booked-appointments': {
+      id: '/_auth/dashboard/booked-appointments'
+      path: '/booked-appointments'
+      fullPath: '/dashboard/booked-appointments'
       preLoaderRoute: typeof AuthDashboardBookedAppointmentsRouteImport
       parentRoute: typeof AuthDashboardRoute
     }
@@ -227,13 +217,6 @@ declare module '@tanstack/react-router' {
 }
 declare module '@tanstack/react-start/server' {
   interface ServerFileRoutesByPath {
-    '/api/demo-names': {
-      id: '/api/demo-names'
-      path: '/api/demo-names'
-      fullPath: '/api/demo-names'
-      preLoaderRoute: typeof ApiDemoNamesServerRouteImport
-      parentRoute: typeof rootServerRouteImport
-    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -280,7 +263,6 @@ export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 const rootServerRouteChildren: RootServerRouteChildren = {
-  ApiDemoNamesServerRoute: ApiDemoNamesServerRoute,
   ApiAuthSplatServerRoute: ApiAuthSplatServerRoute,
 }
 export const serverRouteTree = rootServerRouteImport

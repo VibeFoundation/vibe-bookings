@@ -42,7 +42,7 @@ function AdminPanelComponent() {
 					{
 						icon: <AppointmentsIcon />,
 						label: "نوبتها",
-						to: linkOptions({ to: "/dashboard/bookedAppointments" }).to,
+						to: linkOptions({ to: "/dashboard/booked-appointments" }).to,
 					},
 					{ icon: <ClientsIcon />, label: "مشتریان", to: "/dashboard/clients" },
 					{ icon: <ServicesIcon />, label: "خدمات", to: "/dashboard/services" },
