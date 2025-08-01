@@ -19,6 +19,7 @@ import { Route as AuthDashboard2RouteImport } from './routes/_auth/dashboard2'
 import { Route as AuthDashboardRouteImport } from './routes/_auth/dashboard'
 import { Route as AuthDashboardIndexRouteImport } from './routes/_auth/dashboard/index'
 import { Route as AuthDashboardBookedAppointmentsRouteImport } from './routes/_auth/dashboard/booked-appointments'
+import { ServerRoute as ApiElectricTableServerRouteImport } from './routes/api/electric/$table'
 import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth/$'
 
 const rootServerRouteImport = createServerRootRoute()
@@ -63,6 +64,11 @@ const AuthDashboardBookedAppointmentsRoute =
     path: '/booked-appointments',
     getParentRoute: () => AuthDashboardRoute,
   } as any)
+const ApiElectricTableServerRoute = ApiElectricTableServerRouteImport.update({
+  id: '/api/electric/$table',
+  path: '/api/electric/$table',
+  getParentRoute: () => rootServerRouteImport,
+} as any)
 const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -135,24 +141,28 @@ export interface RootRouteChildren {
 }
 export interface FileServerRoutesByFullPath {
   '/api/auth/$': typeof ApiAuthSplatServerRoute
+  '/api/electric/$table': typeof ApiElectricTableServerRoute
 }
 export interface FileServerRoutesByTo {
   '/api/auth/$': typeof ApiAuthSplatServerRoute
+  '/api/electric/$table': typeof ApiElectricTableServerRoute
 }
 export interface FileServerRoutesById {
   __root__: typeof rootServerRouteImport
   '/api/auth/$': typeof ApiAuthSplatServerRoute
+  '/api/electric/$table': typeof ApiElectricTableServerRoute
 }
 export interface FileServerRouteTypes {
   fileServerRoutesByFullPath: FileServerRoutesByFullPath
-  fullPaths: '/api/auth/$'
+  fullPaths: '/api/auth/$' | '/api/electric/$table'
   fileServerRoutesByTo: FileServerRoutesByTo
-  to: '/api/auth/$'
-  id: '__root__' | '/api/auth/$'
+  to: '/api/auth/$' | '/api/electric/$table'
+  id: '__root__' | '/api/auth/$' | '/api/electric/$table'
   fileServerRoutesById: FileServerRoutesById
 }
 export interface RootServerRouteChildren {
   ApiAuthSplatServerRoute: typeof ApiAuthSplatServerRoute
+  ApiElectricTableServerRoute: typeof ApiElectricTableServerRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -217,6 +227,13 @@ declare module '@tanstack/react-router' {
 }
 declare module '@tanstack/react-start/server' {
   interface ServerFileRoutesByPath {
+    '/api/electric/$table': {
+      id: '/api/electric/$table'
+      path: '/api/electric/$table'
+      fullPath: '/api/electric/$table'
+      preLoaderRoute: typeof ApiElectricTableServerRouteImport
+      parentRoute: typeof rootServerRouteImport
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -264,6 +281,7 @@ export const routeTree = rootRouteImport
   ._addFileTypes<FileRouteTypes>()
 const rootServerRouteChildren: RootServerRouteChildren = {
   ApiAuthSplatServerRoute: ApiAuthSplatServerRoute,
+  ApiElectricTableServerRoute: ApiElectricTableServerRoute,
 }
 export const serverRouteTree = rootServerRouteImport
   ._addFileChildren(rootServerRouteChildren)

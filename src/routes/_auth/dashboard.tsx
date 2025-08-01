@@ -1,3 +1,4 @@
+import { useLiveQuery } from "@tanstack/react-db";
 import {
 	createFileRoute,
 	Link,
@@ -5,6 +6,7 @@ import {
 	Outlet,
 } from "@tanstack/react-router";
 import { useState } from "react";
+import { serviceCollection } from "@/collections/serviceCollection";
 import { authClient } from "@/lib/auth-client";
 import {
 	AppointmentsIcon,
@@ -24,7 +26,13 @@ export const Route = createFileRoute("/_auth/dashboard")({
 function AdminPanelComponent() {
 	const navigate = Route.useNavigate();
 	const [isSidebarOpen, setSidebarOpen] = useState(false);
-	console.log(authClient.useSession().data?.user);
+	const serviceLiveQuery = useLiveQuery((q) =>
+		q
+			.from({ service: serviceCollection })
+			.select((f) => ({ service: f.service })),
+	);
+
+	console.log(serviceLiveQuery.data);
 
 	const handleLogout = () => {
 		authClient.signOut();

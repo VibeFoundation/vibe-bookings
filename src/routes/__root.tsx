@@ -4,7 +4,6 @@ import {
 	HeadContent,
 	Outlet,
 	Scripts,
-	useRouter,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { useEffect } from "react";
@@ -55,10 +54,8 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 });
 
 function RootComponent() {
-	const router = useRouter();
-
 	return (
-		<ThemeProvider>
+		<ThemeProvider defaultTheme="light">
 			<Outlet />
 			<Toaster
 				className="font-body"
