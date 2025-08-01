@@ -10,10 +10,6 @@ export const auth = betterAuth({
 		provider: "pg",
 	}),
 
-	rateLimit: {
-		enabled: true,
-	},
-
 	appName: "Nobatki",
 	databaseHooks: {
 		verification: {
