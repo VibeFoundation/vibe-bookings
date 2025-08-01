@@ -1,12 +1,16 @@
-Welcome to your new TanStack app! 
-
 # Getting Started
 
-To run this application:
+To run this application you need a few things first:
+
+- docker
+- caddy (can be installed using proto)
+- bun (can be installed using proto)
+
+If you want you can install proto and then manage bun/caddy/npm versions with it.
 
 ```bash
 bun install
-bunx --bun run start  
+bun mprocs  
 ```
 
 # Building For Production
@@ -14,7 +18,7 @@ bunx --bun run start
 To build this application for production:
 
 ```bash
-bunx --bun run build
+bun --bun run build
 ```
 
 ## Testing
@@ -22,7 +26,7 @@ bunx --bun run build
 This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
 
 ```bash
-bunx --bun run test
+bun --bun run test
 ```
 
 ## Styling
@@ -36,9 +40,9 @@ This project uses [Biome](https://biomejs.dev/) for linting and formatting. The 
 
 
 ```bash
-bunx --bun run lint
-bunx --bun run format
-bunx --bun run check
+bun --bun run lint
+bun --bun run format
+bun --bun run check
 ```
 
 
@@ -59,7 +63,7 @@ Now that you have two routes you can use a `Link` component to navigate between 
 To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
 
 ```tsx
-import { Link } from "@tanstack/react-router";
+import { Link } from "@/components/base/link/link";
 ```
 
 Then anywhere in your JSX you can use it like so:
@@ -82,7 +86,7 @@ Here is an example layout that includes a header:
 import { Outlet, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 
-import { Link } from "@tanstack/react-router";
+import { Link } from "@/components/base/link/link";
 
 export const Route = createRootRoute({
   component: () => (
@@ -218,83 +222,6 @@ export default App;
 ```
 
 You can find out everything you need to know on how to use React-Query in the [React-Query documentation](https://tanstack.com/query/latest/docs/framework/react/overview).
-
-## State Management
-
-Another common requirement for React applications is state management. There are many options for state management in React. TanStack Store provides a great starting point for your project.
-
-First you need to add TanStack Store as a dependency:
-
-```bash
-bun install @tanstack/store
-```
-
-Now let's create a simple counter in the `src/App.tsx` file as a demonstration.
-
-```tsx
-import { useStore } from "@tanstack/react-store";
-import { Store } from "@tanstack/store";
-import "./App.css";
-
-const countStore = new Store(0);
-
-function App() {
-  const count = useStore(countStore);
-  return (
-    <div>
-      <button onClick={() => countStore.setState((n) => n + 1)}>
-        Increment - {count}
-      </button>
-    </div>
-  );
-}
-
-export default App;
-```
-
-One of the many nice features of TanStack Store is the ability to derive state from other state. That derived state will update when the base state updates.
-
-Let's check this out by doubling the count using derived state.
-
-```tsx
-import { useStore } from "@tanstack/react-store";
-import { Store, Derived } from "@tanstack/store";
-import "./App.css";
-
-const countStore = new Store(0);
-
-const doubledStore = new Derived({
-  fn: () => countStore.state * 2,
-  deps: [countStore],
-});
-doubledStore.mount();
-
-function App() {
-  const count = useStore(countStore);
-  const doubledCount = useStore(doubledStore);
-
-  return (
-    <div>
-      <button onClick={() => countStore.setState((n) => n + 1)}>
-        Increment - {count}
-      </button>
-      <div>Doubled - {doubledCount}</div>
-    </div>
-  );
-}
-
-export default App;
-```
-
-We use the `Derived` class to create a new store that is derived from another store. The `Derived` class has a `mount` method that will start the derived store updating.
-
-Once we've created the derived store we can use it in the `App` component just like we would any other store using the `useStore` hook.
-
-You can find out everything you need to know on how to use TanStack Store in the [TanStack Store documentation](https://tanstack.com/store/latest).
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
 
 # Learn More
 
