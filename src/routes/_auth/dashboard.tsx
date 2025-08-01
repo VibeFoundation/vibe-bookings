@@ -6,7 +6,7 @@ import {
 	Outlet,
 } from "@tanstack/react-router";
 import { useState } from "react";
-import { serviceCollection } from "@/collections/serviceCollection";
+import { serviceCollection } from "@/collections/service";
 import { authClient } from "@/lib/auth-client";
 import {
 	AppointmentsIcon,
@@ -17,7 +17,7 @@ import {
 	ServicesIcon,
 	SettingsIcon,
 	StaffIcon,
-} from "../../components/icons/icons";
+} from "@/components/icons/icons";
 
 export const Route = createFileRoute("/_auth/dashboard")({
 	component: AdminPanelComponent,
