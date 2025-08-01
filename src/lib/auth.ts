@@ -10,6 +10,21 @@ export const auth = betterAuth({
 		provider: "pg",
 	}),
 
+	rateLimit: {
+		enabled: true,
+	},
+
+	appName: "Nobatki",
+	databaseHooks: {
+		verification: {
+			create: {
+				async after(verification, context) {
+					await auth.api.createOrganization({});
+				},
+			},
+		},
+	},
+
 	session: {
 		cookieCache: {
 			enabled: true,

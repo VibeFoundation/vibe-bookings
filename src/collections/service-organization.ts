@@ -17,9 +17,9 @@ export type ServiceOrganizationSchema = v.InferOutput<
 
 export const serviceOrganizationCollection = createCollection(
 	electricCollectionOptions({
-		id: `todos`,
+		id: `service-organization`,
 		shapeOptions: {
-			url: `http://localhost:3100/api/electric/service-organization`,
+			url: `http://localhost:3002/api/electric/service-organization`,
 		},
 		getKey: (item) => item.id,
 		schema: serviceOrganizationSchema,

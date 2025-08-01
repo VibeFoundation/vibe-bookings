@@ -18,6 +18,7 @@ export const serviceOrganizationCreate = createServerFn()
 	.handler(async (ctx) => {
 		return db.transaction(async (tx) => {
 			const txid = await generateTxId(tx);
+
 			if (!ctx.context.authInfo.session.activeOrganizationId) {
 				throw new Error("Please select an organization first");
 			}

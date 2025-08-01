@@ -7,6 +7,7 @@ import {
 	primaryKey,
 	text,
 	timestamp,
+	unique,
 	uuid,
 	varchar,
 } from "drizzle-orm/pg-core";
@@ -46,7 +47,7 @@ export const service = pgTable(
 		updated_at: timestamp().$onUpdate(() => sql`now()`),
 		created_at: timestamp().defaultNow().notNull(),
 	},
-	(t) => [primaryKey({ columns: [t.id] })],
+	(t) => [primaryKey({ columns: [t.id] }), unique().on(t.type)],
 );
 
 export const serviceOrganization = pgTable(

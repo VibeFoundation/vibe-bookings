@@ -14,9 +14,9 @@ export type ServiceSchema = v.InferOutput<typeof serviceSchema>;
 
 export const serviceCollection = createCollection(
 	electricCollectionOptions({
-		id: `todos`,
+		id: `service`,
 		shapeOptions: {
-			url: `http://localhost:3100/api/electric/service`,
+			url: `http://localhost:3002/api/electric/service`,
 			parser: {
 				timestamptz: (date: string) => new Date(date),
 			},
