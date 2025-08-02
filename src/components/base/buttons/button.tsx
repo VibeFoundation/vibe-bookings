@@ -256,6 +256,7 @@ export const Button = ({
 			)}
 
 			{loading && (
+				// biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
 				<svg
 					fill="none"
 					data-icon="loading"

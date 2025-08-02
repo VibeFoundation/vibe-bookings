@@ -16,5 +16,11 @@
 	"verify_page_in_review": "در حال برسی",
 	"verify_page_resend_code_to": "ارسال مجدد کد تا 00:",
 	"verify_page_wrong_otp": "کد وارد شده اشتباه است",
-	"verify_page_expired_otp": "کد شما منقضی شده است لطفا مجدد درخواست بدهید"
+	"verify_page_expired_otp": "کد شما منقضی شده است لطفا مجدد درخواست بدهید",
+	"dashboard": "داشبورد",
+	"reservation": "نوبت ها",
+	"Customers": "مشتریان",
+	"setting": "تنظیمات",
+	"service": "خدمات",
+	"staff": "کارکنان"
 }

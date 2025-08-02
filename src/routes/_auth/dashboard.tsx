@@ -4,8 +4,16 @@ import {
 	linkOptions,
 	Outlet,
 } from "@tanstack/react-router";
+import { BarChartSquare02, Clapperboard, Settings01 } from "@untitledui/icons";
 import { useState } from "react";
+import { GrRestroomWomen } from "react-icons/gr";
+import type {
+	NavItemDividerType,
+	NavItemType,
+} from "@/components/application/app-navigation/config";
+import { SidebarNavigationSectionDividers } from "@/components/application/app-navigation/sidebar-navigation/sidebar-section-dividers";
 import { authClient } from "@/lib/auth-client";
+import { m } from "@/paraglide/messages";
 import {
 	AppointmentsIcon,
 	ClientsIcon,
@@ -16,6 +24,50 @@ import {
 	SettingsIcon,
 	StaffIcon,
 } from "../../components/icons/icons";
+
+const navItemsWithDividers: (NavItemType | NavItemDividerType)[] = [
+	{
+		divider: true,
+	},
+	{
+		label: m.dashboard(),
+		href: linkOptions({ to: "/dashboard" }).to,
+		icon: BarChartSquare02,
+	},
+	{
+		label: m.reservation(),
+		href: linkOptions({ to: "/dashboard/reservation" }).to,
+		icon: Clapperboard,
+	},
+	{
+		label: m.Customers(),
+		href: linkOptions({ to: "/dashboard/customers" }).to,
+		icon: GrRestroomWomen,
+		iconSize: "7",
+	},
+	{
+		label: m.service(),
+		href: linkOptions({ to: "/dashboard/service" }).to,
+		icon: Settings01,
+	},
+	{
+		label: m.staff(),
+		href: linkOptions({ to: "/dashboard/staff" }).to,
+		icon: Settings01,
+	},
+	{
+		label: m.setting(),
+		href: linkOptions({ to: "/dashboard/setting" }).to,
+		icon: Settings01,
+	},
+];
+
+export const SidebarSectionDividersDemo = () => (
+	<SidebarNavigationSectionDividers
+		activeUrl="/"
+		items={navItemsWithDividers}
+	/>
+);
 
 export const Route = createFileRoute("/_auth/dashboard")({
 	component: AdminPanelComponent,
@@ -31,55 +83,10 @@ function AdminPanelComponent() {
 		navigate({ to: "/login" });
 	};
 
-	const SidebarContent = () => (
-		<div className="flex flex-col h-full">
-			<div className="h-20 flex items-center justify-center border-b border-gray-200 shrink-0">
-				coming soon
-			</div>
-			<nav className="flex-1 px-4 py-6 space-y-2">
-				{[
-					{ icon: <DashboardIcon />, label: "داشبورد", active: true },
-					{
-						icon: <AppointmentsIcon />,
-						label: "نوبتها",
-						to: linkOptions({ to: "/dashboard/booked-appointments" }).to,
-					},
-					{ icon: <ClientsIcon />, label: "مشتریان", to: "/dashboard/clients" },
-					{ icon: <ServicesIcon />, label: "خدمات", to: "/dashboard/services" },
-					{ icon: <StaffIcon />, label: "کارکنان", to: "/dashboard/staff" },
-					{
-						icon: <SettingsIcon />,
-						label: "تنظیمات",
-						to: "/dashboard/settings",
-					},
-				].map((item) => (
-					<Link
-						key={item.label}
-						to={item.to}
-						className={`flex items-center gap-3 px-4 py-2.5 text-gray-600 font-semibold rounded-lg transition-colors ${item.active ? "bg-purple-100 text-purple-600" : "hover:bg-gray-100"}`}
-					>
-						{item.icon}
-						<span>{item.label}</span>
-					</Link>
-				))}
-			</nav>
-			<div className="px-4 py-4 border-t border-gray-200">
-				<button
-					type="button"
-					onClick={handleLogout}
-					className="w-full flex items-center gap-3 px-4 py-2.5 text-gray-600 hover:bg-red-50 hover:text-red-600 rounded-lg transition-colors"
-				>
-					<LogoutIcon />
-					<span>خروج</span>
-				</button>
-			</div>
-		</div>
-	);
-
 	return (
 		<div className="flex h-screen bg-gray-50">
 			<aside className="hidden lg:block w-64 bg-white border-l border-gray-200">
-				<SidebarContent />
+				<SidebarSectionDividersDemo />
 			</aside>
 			<button
 				type="button"
@@ -89,7 +96,7 @@ function AdminPanelComponent() {
 			<aside
 				className={`fixed top-0 right-0 h-full w-64 bg-white z-40 transform transition-transform lg:hidden ${isSidebarOpen ? "translate-x-0" : "translate-x-full"}`}
 			>
-				<SidebarContent />
+				<SidebarSectionDividersDemo />
 			</aside>
 
 			<div className="flex-1 flex flex-col overflow-hidden">

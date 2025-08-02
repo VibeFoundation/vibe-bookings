@@ -81,6 +81,7 @@ const StatusBadge = ({ status }: { status: Appointment["status"] }) => {
 };
 
 const SearchIcon = (props: SVGProps<SVGSVGElement>) => (
+	// biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
 	<svg
 		{...props}
 		xmlns="http://www.w3.org/2000/svg"
@@ -99,6 +100,7 @@ const SearchIcon = (props: SVGProps<SVGSVGElement>) => (
 );
 
 const PlusCircleIcon = (props: SVGProps<SVGSVGElement>) => (
+	// biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
 	<svg
 		{...props}
 		xmlns="http://www.w3.org/2000/svg"
@@ -118,6 +120,7 @@ const PlusCircleIcon = (props: SVGProps<SVGSVGElement>) => (
 );
 
 const CalendarIcon = (props: SVGProps<SVGSVGElement>) => (
+	// biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
 	<svg
 		{...props}
 		xmlns="http://www.w3.org/2000/svg"
@@ -138,6 +141,7 @@ const CalendarIcon = (props: SVGProps<SVGSVGElement>) => (
 );
 
 const ScissorsIcon = (props: SVGProps<SVGSVGElement>) => (
+	// biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
 	<svg
 		{...props}
 		xmlns="http://www.w3.org/2000/svg"
@@ -159,6 +163,7 @@ const ScissorsIcon = (props: SVGProps<SVGSVGElement>) => (
 );
 
 const UserIcon = (props: SVGProps<SVGSVGElement>) => (
+	// biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
 	<svg
 		{...props}
 		xmlns="http://www.w3.org/2000/svg"
@@ -176,7 +181,7 @@ const UserIcon = (props: SVGProps<SVGSVGElement>) => (
 	</svg>
 );
 
-export const Route = createFileRoute("/_auth/dashboard/booked-appointments")({
+export const Route = createFileRoute("/_auth/dashboard/reservation")({
 	component: BookedAppointments,
 });
 
@@ -285,7 +290,9 @@ function BookedAppointments() {
 											<StatusBadge status={appt.status} />
 										</td>
 										<td className="p-4 whitespace-nowrap">
+											{/** biome-ignore lint/a11y/useButtonType: <explanation> */}
 											<button className="text-gray-500 hover:text-[#B799FF]">
+												{/** biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
 												<svg
 													xmlns="http://www.w3.org/2000/svg"
 													width="24"
@@ -329,7 +336,9 @@ function BookedAppointments() {
 										<StatusBadge status={appt.status} />
 									</div>
 								</div>
+								{/** biome-ignore lint/a11y/useButtonType: <explanation> */}
 								<button className="text-gray-500 hover:text-[#B799FF]">
+									{/** biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										width="24"

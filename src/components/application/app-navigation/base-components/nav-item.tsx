@@ -20,6 +20,8 @@ interface NavItemBaseProps {
 	type: "link" | "collapsible" | "collapsible-child";
 	/** Icon component to display. */
 	icon?: FC<HTMLAttributes<HTMLOrSVGElement>>;
+	/** Icon component to display. */
+	iconSize?: string;
 	/** Badge to display. */
 	badge?: ReactNode;
 	/** Whether the nav item is currently active. */
@@ -34,6 +36,7 @@ interface NavItemBaseProps {
 
 export const NavItemBase = ({
 	current,
+	iconSize,
 	type,
 	badge,
 	href,
@@ -45,7 +48,7 @@ export const NavItemBase = ({
 	const iconElement = Icon && (
 		<Icon
 			aria-hidden="true"
-			className="mr-2 size-5 shrink-0 text-fg-quaternary transition-inherit-all"
+			className={`mr-2 size-5 size-${iconSize} shrink-0 text-secondary transition-inherit-all`}
 		/>
 	);
 
@@ -122,7 +125,7 @@ export const NavItemBase = ({
 			to={href!}
 			target={isExternal ? "_blank" : "_self"}
 			rel="noopener noreferrer"
-			className={cx("px-3 py-2", styles.root, current && styles.rootSelected)}
+			className={cx("p-3 gap-3", styles.root, current && styles.rootSelected)}
 			onClick={onClick}
 			aria-current={current ? "page" : undefined}
 		>

@@ -15,10 +15,13 @@ import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthDashboard2RouteImport } from './routes/_auth/dashboard2'
 import { Route as AuthDashboardRouteImport } from './routes/_auth/dashboard'
 import { Route as AuthDashboardIndexRouteImport } from './routes/_auth/dashboard/index'
-import { Route as AuthDashboardBookedAppointmentsRouteImport } from './routes/_auth/dashboard/booked-appointments'
+import { Route as AuthDashboardStaffRouteImport } from './routes/_auth/dashboard/staff'
+import { Route as AuthDashboardSettingRouteImport } from './routes/_auth/dashboard/setting'
+import { Route as AuthDashboardServiceRouteImport } from './routes/_auth/dashboard/service'
+import { Route as AuthDashboardReservationRouteImport } from './routes/_auth/dashboard/reservation'
+import { Route as AuthDashboardCustomersRouteImport } from './routes/_auth/dashboard/customers'
 import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth/$'
 
 const rootServerRouteImport = createServerRootRoute()
@@ -42,11 +45,6 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthDashboard2Route = AuthDashboard2RouteImport.update({
-  id: '/dashboard2',
-  path: '/dashboard2',
-  getParentRoute: () => AuthRoute,
-} as any)
 const AuthDashboardRoute = AuthDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -57,12 +55,32 @@ const AuthDashboardIndexRoute = AuthDashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthDashboardRoute,
 } as any)
-const AuthDashboardBookedAppointmentsRoute =
-  AuthDashboardBookedAppointmentsRouteImport.update({
-    id: '/booked-appointments',
-    path: '/booked-appointments',
+const AuthDashboardStaffRoute = AuthDashboardStaffRouteImport.update({
+  id: '/staff',
+  path: '/staff',
+  getParentRoute: () => AuthDashboardRoute,
+} as any)
+const AuthDashboardSettingRoute = AuthDashboardSettingRouteImport.update({
+  id: '/setting',
+  path: '/setting',
+  getParentRoute: () => AuthDashboardRoute,
+} as any)
+const AuthDashboardServiceRoute = AuthDashboardServiceRouteImport.update({
+  id: '/service',
+  path: '/service',
+  getParentRoute: () => AuthDashboardRoute,
+} as any)
+const AuthDashboardReservationRoute =
+  AuthDashboardReservationRouteImport.update({
+    id: '/reservation',
+    path: '/reservation',
     getParentRoute: () => AuthDashboardRoute,
   } as any)
+const AuthDashboardCustomersRoute = AuthDashboardCustomersRouteImport.update({
+  id: '/customers',
+  path: '/customers',
+  getParentRoute: () => AuthDashboardRoute,
+} as any)
 const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -74,16 +92,22 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/verify': typeof VerifyRoute
   '/dashboard': typeof AuthDashboardRouteWithChildren
-  '/dashboard2': typeof AuthDashboard2Route
-  '/dashboard/booked-appointments': typeof AuthDashboardBookedAppointmentsRoute
+  '/dashboard/customers': typeof AuthDashboardCustomersRoute
+  '/dashboard/reservation': typeof AuthDashboardReservationRoute
+  '/dashboard/service': typeof AuthDashboardServiceRoute
+  '/dashboard/setting': typeof AuthDashboardSettingRoute
+  '/dashboard/staff': typeof AuthDashboardStaffRoute
   '/dashboard/': typeof AuthDashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/verify': typeof VerifyRoute
-  '/dashboard2': typeof AuthDashboard2Route
-  '/dashboard/booked-appointments': typeof AuthDashboardBookedAppointmentsRoute
+  '/dashboard/customers': typeof AuthDashboardCustomersRoute
+  '/dashboard/reservation': typeof AuthDashboardReservationRoute
+  '/dashboard/service': typeof AuthDashboardServiceRoute
+  '/dashboard/setting': typeof AuthDashboardSettingRoute
+  '/dashboard/staff': typeof AuthDashboardStaffRoute
   '/dashboard': typeof AuthDashboardIndexRoute
 }
 export interface FileRoutesById {
@@ -93,8 +117,11 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/verify': typeof VerifyRoute
   '/_auth/dashboard': typeof AuthDashboardRouteWithChildren
-  '/_auth/dashboard2': typeof AuthDashboard2Route
-  '/_auth/dashboard/booked-appointments': typeof AuthDashboardBookedAppointmentsRoute
+  '/_auth/dashboard/customers': typeof AuthDashboardCustomersRoute
+  '/_auth/dashboard/reservation': typeof AuthDashboardReservationRoute
+  '/_auth/dashboard/service': typeof AuthDashboardServiceRoute
+  '/_auth/dashboard/setting': typeof AuthDashboardSettingRoute
+  '/_auth/dashboard/staff': typeof AuthDashboardStaffRoute
   '/_auth/dashboard/': typeof AuthDashboardIndexRoute
 }
 export interface FileRouteTypes {
@@ -104,16 +131,22 @@ export interface FileRouteTypes {
     | '/login'
     | '/verify'
     | '/dashboard'
-    | '/dashboard2'
-    | '/dashboard/booked-appointments'
+    | '/dashboard/customers'
+    | '/dashboard/reservation'
+    | '/dashboard/service'
+    | '/dashboard/setting'
+    | '/dashboard/staff'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/login'
     | '/verify'
-    | '/dashboard2'
-    | '/dashboard/booked-appointments'
+    | '/dashboard/customers'
+    | '/dashboard/reservation'
+    | '/dashboard/service'
+    | '/dashboard/setting'
+    | '/dashboard/staff'
     | '/dashboard'
   id:
     | '__root__'
@@ -122,8 +155,11 @@ export interface FileRouteTypes {
     | '/login'
     | '/verify'
     | '/_auth/dashboard'
-    | '/_auth/dashboard2'
-    | '/_auth/dashboard/booked-appointments'
+    | '/_auth/dashboard/customers'
+    | '/_auth/dashboard/reservation'
+    | '/_auth/dashboard/service'
+    | '/_auth/dashboard/setting'
+    | '/_auth/dashboard/staff'
     | '/_auth/dashboard/'
   fileRoutesById: FileRoutesById
 }
@@ -185,13 +221,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_auth/dashboard2': {
-      id: '/_auth/dashboard2'
-      path: '/dashboard2'
-      fullPath: '/dashboard2'
-      preLoaderRoute: typeof AuthDashboard2RouteImport
-      parentRoute: typeof AuthRoute
-    }
     '/_auth/dashboard': {
       id: '/_auth/dashboard'
       path: '/dashboard'
@@ -206,11 +235,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthDashboardIndexRouteImport
       parentRoute: typeof AuthDashboardRoute
     }
-    '/_auth/dashboard/booked-appointments': {
-      id: '/_auth/dashboard/booked-appointments'
-      path: '/booked-appointments'
-      fullPath: '/dashboard/booked-appointments'
-      preLoaderRoute: typeof AuthDashboardBookedAppointmentsRouteImport
+    '/_auth/dashboard/staff': {
+      id: '/_auth/dashboard/staff'
+      path: '/staff'
+      fullPath: '/dashboard/staff'
+      preLoaderRoute: typeof AuthDashboardStaffRouteImport
+      parentRoute: typeof AuthDashboardRoute
+    }
+    '/_auth/dashboard/setting': {
+      id: '/_auth/dashboard/setting'
+      path: '/setting'
+      fullPath: '/dashboard/setting'
+      preLoaderRoute: typeof AuthDashboardSettingRouteImport
+      parentRoute: typeof AuthDashboardRoute
+    }
+    '/_auth/dashboard/service': {
+      id: '/_auth/dashboard/service'
+      path: '/service'
+      fullPath: '/dashboard/service'
+      preLoaderRoute: typeof AuthDashboardServiceRouteImport
+      parentRoute: typeof AuthDashboardRoute
+    }
+    '/_auth/dashboard/reservation': {
+      id: '/_auth/dashboard/reservation'
+      path: '/reservation'
+      fullPath: '/dashboard/reservation'
+      preLoaderRoute: typeof AuthDashboardReservationRouteImport
+      parentRoute: typeof AuthDashboardRoute
+    }
+    '/_auth/dashboard/customers': {
+      id: '/_auth/dashboard/customers'
+      path: '/customers'
+      fullPath: '/dashboard/customers'
+      preLoaderRoute: typeof AuthDashboardCustomersRouteImport
       parentRoute: typeof AuthDashboardRoute
     }
   }
@@ -228,12 +285,20 @@ declare module '@tanstack/react-start/server' {
 }
 
 interface AuthDashboardRouteChildren {
-  AuthDashboardBookedAppointmentsRoute: typeof AuthDashboardBookedAppointmentsRoute
+  AuthDashboardCustomersRoute: typeof AuthDashboardCustomersRoute
+  AuthDashboardReservationRoute: typeof AuthDashboardReservationRoute
+  AuthDashboardServiceRoute: typeof AuthDashboardServiceRoute
+  AuthDashboardSettingRoute: typeof AuthDashboardSettingRoute
+  AuthDashboardStaffRoute: typeof AuthDashboardStaffRoute
   AuthDashboardIndexRoute: typeof AuthDashboardIndexRoute
 }
 
 const AuthDashboardRouteChildren: AuthDashboardRouteChildren = {
-  AuthDashboardBookedAppointmentsRoute: AuthDashboardBookedAppointmentsRoute,
+  AuthDashboardCustomersRoute: AuthDashboardCustomersRoute,
+  AuthDashboardReservationRoute: AuthDashboardReservationRoute,
+  AuthDashboardServiceRoute: AuthDashboardServiceRoute,
+  AuthDashboardSettingRoute: AuthDashboardSettingRoute,
+  AuthDashboardStaffRoute: AuthDashboardStaffRoute,
   AuthDashboardIndexRoute: AuthDashboardIndexRoute,
 }
 
@@ -243,12 +308,10 @@ const AuthDashboardRouteWithChildren = AuthDashboardRoute._addFileChildren(
 
 interface AuthRouteChildren {
   AuthDashboardRoute: typeof AuthDashboardRouteWithChildren
-  AuthDashboard2Route: typeof AuthDashboard2Route
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthDashboardRoute: AuthDashboardRouteWithChildren,
-  AuthDashboard2Route: AuthDashboard2Route,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)

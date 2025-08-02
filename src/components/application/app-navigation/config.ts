@@ -7,6 +7,8 @@ export type NavItemType = {
 	href?: string;
 	/** Icon component to display. */
 	icon?: FC<{ className?: string }>;
+
+	iconSize?: string;
 	/** Badge to display. */
 	badge?: ReactNode;
 	/** List of sub-items to display. */

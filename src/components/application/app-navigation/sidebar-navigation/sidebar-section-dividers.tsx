@@ -1,10 +1,10 @@
 "use client";
 
-import { SearchLg } from "@untitledui/icons";
-import { Input } from "@/components/base/input/input";
-import { UntitledLogo } from "@/components/foundations/logo/untitledui-logo";
+import { linkOptions } from "@tanstack/react-router";
+import { Link } from "react-aria-components";
+import { IoExitOutline } from "react-icons/io5";
+import { Button } from "@/components/base/buttons/button";
 import { MobileNavigationHeader } from "../base-components/mobile-header";
-import { NavAccountCard } from "../base-components/nav-account-card";
 import { NavList } from "../base-components/nav-list";
 import type { NavItemDividerType, NavItemType } from "../config";
 
@@ -19,7 +19,7 @@ export const SidebarNavigationSectionDividers = ({
 	activeUrl,
 	items,
 }: SidebarNavigationSectionDividersProps) => {
-	const MAIN_SIDEBAR_WIDTH = 292;
+	const MAIN_SIDEBAR_WIDTH = 256;
 
 	const content = (
 		<aside
@@ -28,24 +28,32 @@ export const SidebarNavigationSectionDividers = ({
 					"--width": `${MAIN_SIDEBAR_WIDTH}px`,
 				} as React.CSSProperties
 			}
-			className="flex h-full w-full max-w-full flex-col justify-between overflow-auto border-secondary bg-primary pt-4 shadow-xs md:border-r lg:w-(--width) lg:rounded-xl lg:border lg:pt-5"
+			className="flex h-full w-full max-w-full flex-col justify-between   overflow-auto border-secondary bg-primary pt-4 shadow-xs md:border-r lg:w-(--width) lg:border lg:p-5"
 		>
-			<div className="flex flex-col gap-5 px-4 lg:px-5">
-				<UntitledLogo className="h-8" />
-				<Input
-					shortcut
-					size="sm"
-					aria-label="Search"
-					placeholder="Search"
-					icon={SearchLg}
-				/>
+			<div>
+				<div className="flex flex-col gap-5 px-4 lg:px-5">
+					<div className="flex gap-1 items-center ">
+						<img
+							src="public/assets/icons/edited-image.png"
+							alt="brand-logo"
+							width={50}
+							height={50}
+						/>
+						<p className="font-bold text-bg-brand-solid text-3xl">نوبتکی</p>
+					</div>
+				</div>
+				<NavList activeUrl={activeUrl} items={items} className="mt-5" />
 			</div>
 
-			<NavList activeUrl={activeUrl} items={items} className="mt-5" />
-
-			<div className="mt-auto flex flex-col gap-5 px-2 py-4 lg:gap-6 lg:px-4 lg:py-4">
-				<NavAccountCard />
-			</div>
+			<Button
+				iconLeading={<IoExitOutline size={30} />}
+				href={linkOptions({ to: "/login" }).to}
+				color="link-gray"
+				className="hover:bg-error-primary flex justify-center hover:text-error-primary_hover"
+				size="xl"
+			>
+				خروج
+			</Button>
 		</aside>
 	);
 
@@ -55,7 +63,7 @@ export const SidebarNavigationSectionDividers = ({
 			<MobileNavigationHeader>{content}</MobileNavigationHeader>
 
 			{/* Desktop sidebar navigation */}
-			<div className="hidden lg:fixed rtl:lg:right-0 lg:inset-y-0 lg:left-0 lg:flex lg:py-1 lg:pl-1">
+			<div className="hidden lg:fixed rtl:lg:right-0 lg:inset-y-0 lg:left-0 lg:flex  lg:pl-1">
 				{content}
 			</div>
 
