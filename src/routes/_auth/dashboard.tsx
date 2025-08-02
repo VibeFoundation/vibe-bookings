@@ -8,15 +8,15 @@ import {
 import { BarChartSquare02, Clapperboard, Settings01 } from "@untitledui/icons";
 import { useState } from "react";
 import { GrRestroomWomen } from "react-icons/gr";
+import { serviceCollection } from "@/collections/service";
 import type {
 	NavItemDividerType,
 	NavItemType,
 } from "@/components/application/app-navigation/config";
 import { SidebarNavigationSectionDividers } from "@/components/application/app-navigation/sidebar-navigation/sidebar-section-dividers";
-import { serviceCollection } from "@/collections/service";
+import { MenuIcon } from "@/components/icons/icons";
 import { authClient } from "@/lib/auth-client";
 import { m } from "@/paraglide/messages";
-import { MenuIcon } from "@/components/icons/icons";
 
 const navItemsWithDividers: (NavItemType | NavItemDividerType)[] = [
 	{
@@ -69,13 +69,13 @@ export const Route = createFileRoute("/_auth/dashboard")({
 function AdminPanelComponent() {
 	const navigate = Route.useNavigate();
 	const [isSidebarOpen, setSidebarOpen] = useState(false);
-	const serviceLiveQuery = useLiveQuery((q) =>
-		q
-			.from({ service: serviceCollection })
-			.select((f) => ({ service: f.service })),
-	);
+	// const serviceLiveQuery = useLiveQuery((q) =>
+	// 	q
+	// 		.from({ service: serviceCollection })
+	// 		.select((f) => ({ service: f.service })),
+	// );
 
-	console.log(serviceLiveQuery.data);
+	// console.log(serviceLiveQuery.data);
 
 	const handleLogout = () => {
 		authClient.signOut();

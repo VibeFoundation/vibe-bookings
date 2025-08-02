@@ -13,7 +13,7 @@ function App() {
 	return (
 		<div className="text-center w-full h-[100dvh] flex items-center justify-center">
 			<Button href={url} color="link-color" size="xl">
-				Button xl
+				Login
 			</Button>
 		</div>
 	);

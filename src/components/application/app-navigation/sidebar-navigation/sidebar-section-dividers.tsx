@@ -34,7 +34,7 @@ export const SidebarNavigationSectionDividers = ({
 				<div className="flex flex-col gap-5 px-4 lg:px-5">
 					<div className="flex gap-1 items-center ">
 						<img
-							src="public/assets/icons/edited-image.png"
+							src="/public/assets/icons/edited-image.png"
 							alt="brand-logo"
 							width={50}
 							height={50}
