@@ -45,7 +45,7 @@ function Login() {
 			<div className="w-full max-w-md bg-white p-5 md:p-10 rounded-2xl md:shadow-sm md:border border-gray-200 flex flex-col gap-16">
 				<div className="text-center flex flex-col justify-between gap-24 items-center">
 					<img
-						src="public/assets/icons/edited-image.png"
+						src="assets/icons/edited-image.png"
 						alt="brand-logo"
 						width={180}
 						height={180}

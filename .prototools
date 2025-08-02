@@ -1,3 +1,7 @@
 bun = "1.2.19"
 node = "22.17.1"
 npm = "11.5.1"
+caddy = "2.10.0"
+
+[plugins]
+caddy = "https://raw.githubusercontent.com/Phault/proto-toml-plugins/main/caddy/plugin.toml"

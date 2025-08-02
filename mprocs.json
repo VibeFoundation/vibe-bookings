@@ -1,0 +1,16 @@
+{
+	"procs": {
+		"caddy": {
+			"shell": "caddy run"
+		},
+		"electric": {
+			"shell": "docker compose up"
+		},
+		"client": {
+			"shell": "bun dev"
+		},
+		"migrations-generate": {
+			"shell": "bun compile-migrations.ts"
+		}
+	}
+}
