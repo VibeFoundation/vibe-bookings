@@ -12,27 +12,8 @@ import {
 	varchar,
 } from "drizzle-orm/pg-core";
 import * as Uuid from "uuid";
-import * as v from "valibot";
 import { organization } from "./auth";
-
-export const serviceTypeEnum = v.picklist([
-	"pedicure",
-	"manicure",
-	"nail_extension",
-	"hair_extension",
-	"hair_braiding",
-	"hair_dyeing",
-	"hair_cutting",
-	"makeup",
-	"shinion",
-	"eyelash_extension",
-	"brow_micro_blading",
-	"lip_shading",
-	"piercing",
-	"tattoo",
-	"laser",
-	"waxing",
-]);
+import { serviceTypeSchema } from "./helpers";
 
 export const service = pgTable(
 	"service",
@@ -42,7 +23,7 @@ export const service = pgTable(
 			.$defaultFn(() => Uuid.v7()),
 		type: varchar("type", {
 			length: 128,
-			enum: serviceTypeEnum.options,
+			enum: serviceTypeSchema.options,
 		}).notNull(),
 		updated_at: timestamp().$onUpdate(() => sql`now()`),
 		created_at: timestamp().defaultNow().notNull(),
@@ -77,5 +58,6 @@ export const serviceOrganization = pgTable(
 		})
 			.onDelete("cascade")
 			.onUpdate("cascade"),
+		unique().on(t.organizationId, t.serviceId),
 	],
 );

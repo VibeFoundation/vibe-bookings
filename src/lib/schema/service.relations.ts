@@ -1,23 +1,23 @@
-import { relations } from "drizzle-orm";
+import { defineRelations } from "drizzle-orm";
 import { organization } from "./auth";
 import { customerVisit } from "./customer";
 import { service, serviceOrganization } from "./service";
 
-export const serviceRelations = relations(service, ({ many }) => ({
-	serviceOrganization: many(serviceOrganization),
-}));
-
-export const serviceOrganizationRelations = relations(
-	serviceOrganization,
-	({ one, many }) => ({
-		service: one(service, {
-			fields: [serviceOrganization.serviceId],
-			references: [service.id],
-		}),
-		organization: one(organization, {
-			fields: [serviceOrganization.organizationId],
-			references: [organization.id],
-		}),
-		customerVisits: many(customerVisit),
+export const serviceRelations = defineRelations(
+	{ service, serviceOrganization, organization, customerVisit },
+	(r) => ({
+		service: { forOrganizations: r.many.serviceOrganization() },
+		serviceOrganization: {
+			service: r.one.service({
+				from: r.serviceOrganization.serviceId,
+				to: r.service.id,
+			}),
+		},
+		organization: {
+			services: r.many.serviceOrganization(),
+		},
+		customerVisit: {
+			visits: r.many.customerVisit(),
+		},
 	}),
 );

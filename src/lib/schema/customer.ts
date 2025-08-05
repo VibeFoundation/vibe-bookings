@@ -49,7 +49,9 @@ export const customerVisit = pgTable(
 		foreignKey({
 			columns: [t.customerId],
 			foreignColumns: [customer.id],
-		}),
+		})
+			.onDelete("cascade")
+			.onUpdate("cascade"),
 	],
 );
 
@@ -70,10 +72,15 @@ export const customerVisitService = pgTable(
 		foreignKey({
 			columns: [t.customerVisitId],
 			foreignColumns: [customerVisit.id],
-		}),
+		})
+			.onDelete("cascade")
+			.onUpdate("cascade"),
+
 		foreignKey({
 			columns: [t.serviceOrganizationId],
 			foreignColumns: [serviceOrganization.id],
-		}),
+		})
+			.onDelete("cascade")
+			.onUpdate("cascade"),
 	],
 );

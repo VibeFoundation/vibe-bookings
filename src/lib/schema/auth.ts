@@ -1,4 +1,5 @@
 import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { rolesSchema } from "./helpers";
 
 export const user = pgTable("user", {
 	id: text("id").primaryKey(),
@@ -76,7 +77,7 @@ export const member = pgTable("member", {
 	userId: text("user_id")
 		.notNull()
 		.references(() => user.id, { onDelete: "cascade" }),
-	role: text("role").default("member").notNull(),
+	role: text("role", { enum: rolesSchema.options }).default("member").notNull(),
 	createdAt: timestamp("created_at").notNull(),
 });
 
@@ -85,8 +86,8 @@ export const invitation = pgTable("invitation", {
 	organizationId: text("organization_id")
 		.notNull()
 		.references(() => organization.id, { onDelete: "cascade" }),
-	email: text("email").notNull(),
-	role: text("role"),
+	phoneNumber: text("phone_number").notNull(),
+	role: text("role", { enum: rolesSchema.options }),
 	status: text("status").default("pending").notNull(),
 	expiresAt: timestamp("expires_at").notNull(),
 	inviterId: text("inviter_id")
