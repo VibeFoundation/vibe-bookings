@@ -5,7 +5,7 @@ import {
 	serviceCoranizationDelete,
 	serviceOrganizationCreate,
 	serviceOrganizationUpdate,
-} from "@/server/service-organization";
+} from "./api";
 
 export const serviceOrganizationSchema = v.object({
 	id: v.string(),

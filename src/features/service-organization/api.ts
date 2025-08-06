@@ -6,20 +6,20 @@ import { createInsertSchema, createUpdateSchema } from "drizzle-valibot";
 import * as v from "valibot";
 import { db } from "@/lib/db";
 import { S } from "@/lib/schema";
-import { organizationRequiredMiddlewareFn } from "./auth-middleware";
-import { generateTxId } from "./generateTxId";
+import { organizationRequiredMiddlewareFn } from "@/server/auth-middleware";
+import { generateTxId } from "@/server/generateTxId";
 
-const customerInsertSchema = v.omit(createInsertSchema(S.customer), [
-	"organizationId",
-	"id",
-]);
+const serviceOrganizationInsertSchema = v.omit(
+	createInsertSchema(S.serviceOrganization),
+	["organizationId", "id"],
+);
 
-export const customerCreate = createServerFn()
+export const serviceOrganizationCreate = createServerFn()
 	.middleware([organizationRequiredMiddlewareFn])
-	.validator(customerInsertSchema)
+	.validator(serviceOrganizationInsertSchema)
 	.handler(async (ctx) => {
 		return db.transaction(async (tx) => {
-			await tx.insert(S.customer).values({
+			await tx.insert(S.serviceOrganization).values({
 				...ctx.data,
 				organizationId: ctx.context.authInfo.session.activeOrganizationId,
 			});
@@ -30,18 +30,18 @@ export const customerCreate = createServerFn()
 		});
 	});
 
-const customerUpdateSchema = v.array(
+const serviceOrganizationUpdateSchema = v.array(
 	v.omit(
-		createUpdateSchema(S.customer, {
-			id: v.pipe(v.string(), v.uuid()),
+		createUpdateSchema(S.serviceOrganization, {
+			serviceId: v.pipe(v.string(), v.uuid()),
 		}),
-		["organizationId"],
+		["id", "organizationId"],
 	),
 );
 
-export const customerUpdate = createServerFn()
+export const serviceOrganizationUpdate = createServerFn()
 	.middleware([organizationRequiredMiddlewareFn])
-	.validator(customerUpdateSchema)
+	.validator(serviceOrganizationUpdateSchema)
 	.handler((ctx) => {
 		return db.transaction(async (tx) => {
 			const values = ctx.data.map((d) => ({
@@ -49,14 +49,14 @@ export const customerUpdate = createServerFn()
 				organizationId: ctx.context.authInfo.session.activeOrganizationId,
 			}));
 
-			await tx.query.customer.upsert({ data: values });
+			await tx.query.serviceOrganization.upsert({ data: values });
 			const txid = await generateTxId(tx);
 
 			return { txid };
 		});
 	});
 
-const customerDeleteSchema = v.array(
+const serviceOrganizationDeleteSchema = v.array(
 	v.pipe(
 		v.string(),
 		v.uuid(),
@@ -64,16 +64,16 @@ const customerDeleteSchema = v.array(
 	),
 );
 
-export const customerDelete = createServerFn()
+export const serviceCoranizationDelete = createServerFn()
 	.middleware([organizationRequiredMiddlewareFn])
-	.validator(customerDeleteSchema)
+	.validator(serviceOrganizationDeleteSchema)
 	.handler((ctx) => {
 		return db.transaction(async (tx) => {
 			await tx
-				.delete(S.customer)
+				.delete(S.serviceOrganization)
 				.where(
 					and(
-						inArray(S.customer.id, ctx.data),
+						inArray(S.serviceOrganization.serviceId, ctx.data),
 						eq(
 							S.serviceOrganization.organizationId,
 							ctx.context.authInfo.session.activeOrganizationId,

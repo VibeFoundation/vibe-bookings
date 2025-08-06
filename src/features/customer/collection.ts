@@ -1,11 +1,7 @@
 import { electricCollectionOptions } from "@tanstack/electric-db-collection";
 import { createCollection } from "@tanstack/react-db";
 import * as v from "valibot";
-import {
-	customerCreate,
-	customerDelete,
-	customerUpdate,
-} from "@/server/customer";
+import { customerCreate, customerDelete, customerUpdate } from "./api";
 
 const customerSchema = v.object({
 	id: v.pipe(v.string(), v.uuid()),
@@ -17,9 +13,9 @@ const customerSchema = v.object({
 
 export const customerCollection = createCollection(
 	electricCollectionOptions({
-		id: `service-organization`,
+		id: `customer`,
 		shapeOptions: {
-			url: `http://localhost:3002/api/electric/service-organization`,
+			url: `http://localhost:3002/api/electric/customer`,
 		},
 		getKey: (item) => item.id,
 		schema: customerSchema,
