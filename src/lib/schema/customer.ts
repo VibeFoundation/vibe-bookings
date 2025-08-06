@@ -22,7 +22,7 @@ export const customer = pgTable(
 		firstName: varchar("first_name", { length: 128 }),
 		lastName: varchar("last_name", { length: 128 }),
 		phoneNumber: varchar("phone_number", { length: 16 }),
-		organizationId: text("organization_id"),
+		organizationId: text("organization_id").notNull(),
 	},
 	(t) => [
 		primaryKey({ columns: [t.id] }),
