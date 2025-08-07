@@ -156,10 +156,21 @@ function Customers() {
 				totalAppointments: 2,
 				lastVisit: "۱۴۰۴/۰۵/۰۲",
 			},
+			{
+				id: 7,
+				name: "رامین رضوی",
+				email: "ramin.r@example.com",
+				avatar: "https://placehold.co/40x40/FCE7F3/831843?text=RR",
+				totalAppointments: 2,
+				lastVisit: "۱۴۰۴/۰۵/۰۸",
+			},
 		],
 		[],
 	);
 
+	// Pagination state
+	const [page, setPage] = useState(1);
+	const pageSize = 5;
 	const filteredCustomers = useMemo(() => {
 		return allCustomers.filter(
 			(customer) =>
@@ -168,8 +179,15 @@ function Customers() {
 		);
 	}, [allCustomers, searchTerm]);
 
+	const totalResults = filteredCustomers.length;
+	const totalPages = Math.ceil(totalResults / pageSize);
+	const paginatedCustomers = useMemo(() => {
+		const start = (page - 1) * pageSize;
+		return filteredCustomers.slice(start, start + pageSize);
+	}, [filteredCustomers, page]);
+
 	return (
-		<div className="space-y-6">
+		<div className="space-y-6 flex flex-col h-full">
 			<div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
 				<div>
 					<h1 className="text-3xl font-bold text-gray-900">مشتریان</h1>
@@ -179,7 +197,7 @@ function Customers() {
 				</div>
 				<button
 					type="button"
-					className="w-full rounded-lg bg-violet-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-700 sm:w-auto"
+					className="w-full z-10 rounded-lg cursor-pointer bg-violet-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-700 sm:w-auto"
 				>
 					+ افزودن مشتری جدید
 				</button>
@@ -188,7 +206,7 @@ function Customers() {
 			<div className="grid grid-cols-1 gap-6 md:grid-cols-3">
 				<CustomerStatCard
 					title="تعداد کل مشتریان"
-					value="۱۴۲"
+					value={allCustomers.length.toString()}
 					icon={<CustomersIcon />}
 				/>
 				<CustomerStatCard
@@ -203,7 +221,7 @@ function Customers() {
 				/>
 			</div>
 
-			<div className="rounded-xl border border-gray-200 bg-white shadow-sm">
+			<div className="rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden h-full flex flex-col">
 				<div className="p-4 sm:p-6 border-b border-gray-200">
 					<div className="relative">
 						<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
@@ -214,13 +232,13 @@ function Customers() {
 							placeholder="جستجوی مشتری..."
 							value={searchTerm}
 							onChange={(e) => setSearchTerm(e.target.value)}
-							className="block w-full max-w-sm rounded-md border-0 py-2 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
+							className="block w-full max-w-sm rounded-md border-0 py-2 pr-10 text-gray-900 outline-0 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
 						/>
 					</div>
 				</div>
 
 				{/* Desktop Table */}
-				<div className="hidden md:block">
+				<div className="hidden md:block h-full">
 					<table className="min-w-full divide-y divide-gray-200">
 						<thead className="bg-gray-50">
 							<tr>
@@ -248,7 +266,7 @@ function Customers() {
 							</tr>
 						</thead>
 						<tbody className="divide-y divide-gray-200 bg-white">
-							{filteredCustomers.map((customer) => (
+							{paginatedCustomers.map((customer) => (
 								<tr key={customer.email} className="hover:bg-gray-50">
 									<td className="whitespace-nowrap py-4 pr-6 text-sm">
 										<div className="flex items-center">
@@ -291,7 +309,7 @@ function Customers() {
 				{/* Mobile Cards */}
 				<div className="md:hidden">
 					<ul className="divide-y divide-gray-200">
-						{filteredCustomers.map((customer) => (
+						{paginatedCustomers.map((customer) => (
 							<li key={customer.email} className="p-4">
 								<div className="flex items-center justify-between">
 									<div className="flex items-center gap-3">
@@ -335,28 +353,36 @@ function Customers() {
 				</div>
 
 				<div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+					{/* Mobile Pagination */}
 					<div className="flex flex-1 justify-between sm:hidden">
-						<a
-							// biome-ignore lint/a11y/useValidAnchor: <explanation>
-							href="#"
-							className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+						<button
+							type="button"
+							disabled={page === 1}
+							onClick={() => setPage((p) => Math.max(1, p - 1))}
+							className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
 						>
 							قبلی
-						</a>
-						<a
-							// biome-ignore lint/a11y/useValidAnchor: <explanation>
-							href="#"
-							className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+						</button>
+						<button
+							type="button"
+							disabled={page === totalPages}
+							onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+							className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
 						>
 							بعدی
-						</a>
+						</button>
 					</div>
+					{/* Desktop Pagination */}
 					<div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
 						<div>
-							<p className="text-sm text-gray-700">
-								نمایش <span className="font-medium">۱</span> تا{" "}
-								<span className="font-medium">۱۰</span> از{" "}
-								<span className="font-medium">۹۷</span> نتیجه
+							<p className="text-sm flex gap-1 text-gray-700">
+								نمایش
+								<span className="font-medium">{(page - 1) * pageSize + 1}</span>
+								تا
+								<span className="font-medium">
+									{Math.min(page * pageSize, totalResults)}
+								</span>
+								از <span className="font-medium">{totalResults}</span> نتیجه
 							</p>
 						</div>
 						<div>
@@ -364,37 +390,37 @@ function Customers() {
 								className="isolate inline-flex -space-x-px rounded-md shadow-sm"
 								aria-label="Pagination"
 							>
-								<a
-									// biome-ignore lint/a11y/useValidAnchor: <explanation>
-									href="#"
-									className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+								<button
+									type="button"
+									disabled={page === totalPages}
+									onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+									className="relative inline-flex items-center rounded-r-md px-2 py-2 disabled:cursor-default cursor-pointer text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 disabled:opacity-50"
 								>
 									<span className="sr-only">بعدی</span>
 									<ChevronRightIcon aria-hidden="true" />
-								</a>
-								<a
-									// biome-ignore lint/a11y/useValidAnchor: <explanation>
-									href="#"
-									aria-current="page"
-									className="relative z-10 inline-flex items-center bg-violet-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
-								>
-									۱
-								</a>
-								<a
-									// biome-ignore lint/a11y/useValidAnchor: <explanation>
-									href="#"
-									className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-								>
-									۲
-								</a>
-								<a
-									// biome-ignore lint/a11y/useValidAnchor: <explanation>
-									href="#"
-									className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+								</button>
+								<span dir="ltr">
+									{Array.from({ length: totalPages }, (_, i) => (
+										<button
+											key={`page${i + 1}`}
+											type="button"
+											onClick={() => setPage(i + 1)}
+											aria-current={page === i + 1 ? "page" : undefined}
+											className={`relative inline-flex items-center px-4 py-2 disabled:cursor-default cursor-pointer text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 ${page === i + 1 ? "z-10 bg-violet-600 text-white" : "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"}`}
+										>
+											{i + 1}
+										</button>
+									))}
+								</span>
+								<button
+									type="button"
+									disabled={page === 1}
+									onClick={() => setPage((p) => Math.max(1, p - 1))}
+									className="relative inline-flex items-center cursor-pointer disabled:cursor-default rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 disabled:opacity-50"
 								>
 									<span className="sr-only">قبلی</span>
 									<ChevronLeftIcon aria-hidden="true" />
-								</a>
+								</button>
 							</nav>
 						</div>
 					</div>
