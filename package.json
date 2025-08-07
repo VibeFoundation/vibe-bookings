@@ -13,6 +13,7 @@
 		"check": "biome check --write",
 		"machine-translate": "inlang machine translate --project project.inlang",
 		"auth-generate": "bun --bun x @better-auth/cli generate",
+		"reset": "bun reset.ts",
 		"db-start": "docker compose up --detach",
 		"db-stop": "docker compose down",
 		"db-push": "bun drizzle-kit push",
