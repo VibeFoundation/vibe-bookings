@@ -1,22 +1,17 @@
 import { useLiveQuery } from "@tanstack/react-db";
 import {
 	createFileRoute,
-	Link,
 	linkOptions,
 	Outlet,
 	useLocation,
 } from "@tanstack/react-router";
 import { BarChartSquare02, Clapperboard, Settings01 } from "@untitledui/icons";
-import { useState } from "react";
 import { GrRestroomWomen } from "react-icons/gr";
-import { serviceCollection } from "@/collections/service";
 import type {
 	NavItemDividerType,
 	NavItemType,
 } from "@/components/application/app-navigation/config";
 import { SidebarNavigationSectionDividers } from "@/components/application/app-navigation/sidebar-navigation/sidebar-section-dividers";
-import HeaderTitle from "@/components/headerTitle";
-import { MenuIcon } from "@/components/icons/icons";
 import { authClient } from "@/lib/auth-client";
 import { m } from "@/paraglide/messages";
 
@@ -75,7 +70,6 @@ export const Route = createFileRoute("/_auth/dashboard")({
 
 function AdminPanelComponent() {
 	const navigate = Route.useNavigate();
-	const [isSidebarOpen, setSidebarOpen] = useState(false);
 	// const serviceLiveQuery = useLiveQuery((q) =>
 	// 	q
 	// 		.from({ service: serviceCollection })
@@ -95,20 +89,7 @@ function AdminPanelComponent() {
 				<SidebarSectionDividersDemo />
 			</aside>
 
-			<div className="flex-1 flex flex-col">
-				<header className="h-20 bg-white border-b hidden lg:flex border-gray-200  items-center justify-between px-4 sm:px-6 lg:px-8 shrink-0">
-					<h1 className="text-xl sm:text-2xl font-bold text-gray-800">
-						<HeaderTitle />
-					</h1>
-
-					<button
-						type="button"
-						className="bg-purple-500 text-white font-semibold px-4 py-2 rounded-lg text-sm hover:bg-purple-600 transition-colors hidden sm:block"
-					>
-						+ افزودن نوبت
-					</button>
-				</header>
-
+			<div className="flex-1 flex flex-col p-3">
 				<Outlet />
 			</div>
 		</div>
