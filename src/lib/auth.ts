@@ -11,15 +11,6 @@ export const auth = betterAuth({
 	}),
 
 	appName: "Nobatki",
-	databaseHooks: {
-		verification: {
-			create: {
-				async after(verification, context) {
-					await auth.api.createOrganization({});
-				},
-			},
-		},
-	},
 
 	session: {
 		cookieCache: {

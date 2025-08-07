@@ -1,11 +1,11 @@
 import { electricCollectionOptions } from "@tanstack/electric-db-collection";
 import { createCollection } from "@tanstack/react-db";
 import * as v from "valibot";
-import { serviceTypeEnum } from "@/lib/schema/service";
+import { serviceTypeSchema } from "@/lib/schema/helpers";
 
 export const serviceSchema = v.object({
 	id: v.string(),
-	type: serviceTypeEnum,
+	type: serviceTypeSchema,
 	updated_at: v.nullable(v.date()),
 	created_at: v.date(),
 });

@@ -8,6 +8,10 @@ export const relations = defineRelations(S, (r) => ({
 			from: r.serviceOrganization.serviceId,
 			to: r.service.id,
 		}),
+		organization: r.one.organization({
+			from: r.serviceOrganization.organizationId,
+			to: r.organization.id,
+		}),
 	},
 	organization: {
 		services: r.many.serviceOrganization(),

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { OverlayTriggerStateContext } from "react-aria-components";
 import { cx } from "@/utils/cx";
 import type { NavItemDividerType, NavItemType } from "../config";
 import { NavItemBase } from "./nav-item";
@@ -19,7 +20,9 @@ export const NavList = ({ activeUrl, items, className }: NavListProps) => {
 			item.href === activeUrl ||
 			item.items?.some((subItem) => subItem.href === activeUrl),
 	);
-	const [currentItem, setCurrentItem] = useState(activeItem);
+	const overlayContext = useContext(OverlayTriggerStateContext);
+
+	// const [currentItem, setCurrentItem] = useState(activeItem);
 
 	return (
 		<ul className={cx("mt-4 flex flex-col px-2 lg:px-4", className)}>
@@ -40,7 +43,7 @@ export const NavList = ({ activeUrl, items, className }: NavListProps) => {
 							className="appearance-none py-0.5"
 							onToggle={(e) => {
 								setOpen(e.currentTarget.open);
-								setCurrentItem(item);
+								// setCurrentItem(item);
 							}}
 						>
 							<NavItemBase
@@ -61,6 +64,9 @@ export const NavList = ({ activeUrl, items, className }: NavListProps) => {
 												badge={childItem.badge}
 												type="collapsible-child"
 												current={activeUrl === childItem.href}
+												onClick={() => {
+													overlayContext?.close();
+												}}
 											>
 												{childItem.label}
 											</NavItemBase>
@@ -82,6 +88,9 @@ export const NavList = ({ activeUrl, items, className }: NavListProps) => {
 							href={item.href}
 							current={activeUrl === item.href}
 							open={open && activeUrl === item.href}
+							onClick={() => {
+								overlayContext?.close();
+							}}
 						>
 							{item.label}
 						</NavItemBase>
