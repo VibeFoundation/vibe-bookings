@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { Button } from "@/components/base/buttons/button";
 import { Input } from "@/components/base/input/input";
+import { PinInput } from "@/components/base/pin-input/pin-input";
 import { authClient } from "@/lib/auth-client";
 import { m } from "@/paraglide/messages";
 
@@ -77,7 +78,14 @@ function VerifyComponent() {
 			dir="rtl"
 		>
 			<div className="w-full max-w-md bg-white p-5 md:p-10 rounded-2xl md:shadow-sm md:border border-gray-200">
-				<div className="flex justify-center mb-8"></div>
+				<div className="flex justify-center mb-8">
+					<img
+						src="assets/icons/edited-image.png"
+						alt="brand-logo"
+						width={180}
+						height={180}
+					/>
+				</div>
 				<div className="text-center">
 					<h2 className="text-xl font-bold text-gray-800 mb-2">
 						{m.verify_page_title()}
@@ -109,7 +117,7 @@ function VerifyComponent() {
 									maxLength={6}
 									isInvalid={!field.state.meta.isValid}
 									hint={field.state.meta.errors.at(0)?.message}
-									placeholder="----"
+									inputClassName="text-center tracking-[10px]"
 									className={`w-full ${!field.state.meta.isValid ? `focus:ring-2 focus:ring-red-200 focus:border-red-400` : `focus:ring-2 focus:ring-purple-200 focus:border-purple-400`}`}
 								/>
 							</div>

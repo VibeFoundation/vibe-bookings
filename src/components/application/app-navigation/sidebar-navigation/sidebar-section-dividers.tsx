@@ -1,7 +1,6 @@
 "use client";
 
-import { linkOptions } from "@tanstack/react-router";
-import { Link } from "react-aria-components";
+import { linkOptions, useRouter } from "@tanstack/react-router";
 import { IoExitOutline } from "react-icons/io5";
 import { Button } from "@/components/base/buttons/button";
 import { MobileNavigationHeader } from "../base-components/mobile-header";
@@ -28,7 +27,7 @@ export const SidebarNavigationSectionDividers = ({
 					"--width": `${MAIN_SIDEBAR_WIDTH}px`,
 				} as React.CSSProperties
 			}
-			className="flex h-full w-full max-w-full flex-col justify-between   overflow-auto border-secondary bg-primary pt-4 shadow-xs md:border-r lg:w-(--width) lg:border lg:p-5"
+			className="flex h-full  max-w-full flex-col justify-between w-56   overflow-auto border-secondary bg-primary pt-4 shadow-xs md:border-r lg:w-(--width) lg:border lg:p-5"
 		>
 			<div>
 				<div className="flex flex-col gap-5 px-4 lg:px-5">

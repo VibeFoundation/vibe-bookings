@@ -5,8 +5,8 @@ import { Link as AriaLink } from "@/components/base/link/link";
 import { cx, sortCx } from "@/utils/cx";
 
 const styles = sortCx({
-	root: "group relative flex w-full cursor-pointer items-center rounded-md bg-primary outline-focus-ring transition duration-100 ease-linear select-none hover:bg-primary_hover focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-2",
-	rootSelected: "bg-active hover:bg-secondary_hover",
+	root: "group relative flex w-full cursor-pointer items-center rounded-md bg-primary outline-focus-ring transition duration-100 ease-linear select-none hover:bg-brand-hover focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-2",
+	rootSelected: "bg-brand-active hover:bg-brand-active",
 });
 
 interface NavItemBaseProps {
@@ -48,7 +48,10 @@ export const NavItemBase = ({
 	const iconElement = Icon && (
 		<Icon
 			aria-hidden="true"
-			className={`mr-2 size-5 size-${iconSize} shrink-0 text-secondary transition-inherit-all`}
+			className={cx(
+				`mr-2 size-5 size-${iconSize} shrink-0 text-secondary transition-inherit-all group-hover:text-text-brand-hover`,
+				current && "text-text-brand-active",
+			)}
 		/>
 	);
 
@@ -64,9 +67,9 @@ export const NavItemBase = ({
 	const labelElement = (
 		<span
 			className={cx(
-				"flex-1 text-md font-semibold text-secondary transition-inherit-all group-hover:text-secondary_hover",
+				"flex-1 text-md font-semibold  text-secondary transition-inherit-all group-hover:text-text-brand-hover",
 				truncate && "truncate",
-				current && "text-secondary_hover",
+				current && "text-text-brand-active",
 			)}
 		>
 			{children}

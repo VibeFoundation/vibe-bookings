@@ -163,7 +163,8 @@
 	/* These will be inverted in dark mode. */
 	--color-alpha-white: rgb(255 255 255);
 	--color-alpha-black: rgb(0 0 0);
-
+	--color-brand-10: rgb(109 40 217);
+	--color-brand-20: rgb(237 233 254);
 	--color-brand-25: rgb(252 250 255);
 	--color-brand-50: rgb(249 245 255);
 	--color-brand-100: rgb(244 235 255);
@@ -740,6 +741,8 @@
 	--color-text-brand-tertiary_alt: var(--color-brand-600);
 	--color-text-brand-secondary_hover: var(--color-brand-800);
 	--color-text-error-primary_hover: var(--color-error-700);
+	--color-text-brand-hover: var(--color-brand-10);
+	--color-text-brand-active: var(--color-brand-10);
 
 	/* BORDER COLORS */
 	--color-border-secondary: var(--color-gray-200);
@@ -877,6 +880,8 @@
 	--background-color-border-brand: var(--color-border-brand);
 	--background-color-border-tertiary: var(--color-border-tertiary);
 	--background-color-border-brand_alt: var(--color-border-brand_alt);
+	--background-color-brand-hover: var(--color-violet-50);
+	--background-color-brand-active: var(--color-brand-20);
 
 	/* TEXT PROPERTY COLORS */
 	--text-color-primary: var(--color-text-primary);

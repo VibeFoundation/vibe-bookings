@@ -1,5 +1,6 @@
 import { useForm } from "@tanstack/react-form";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { phoneNumber } from "better-auth/plugins";
 import * as v from "valibot";
 import { Button } from "@/components/base/buttons/button";
 import { InputBase } from "@/components/base/input/input";
@@ -33,7 +34,7 @@ function Login() {
 			});
 		},
 		validators: {
-			onChange: LoginSchema,
+			onSubmit: LoginSchema,
 		},
 	});
 
@@ -66,10 +67,8 @@ function Login() {
 						loginForm.handleSubmit();
 					}}
 				>
-					<loginForm.Field
-						name="phoneNumber"
-						// biome-ignore lint/correctness/noChildrenProp: <explanation>
-						children={(field) => (
+					<loginForm.Field name="phoneNumber">
+						{(field) => (
 							<div className="mb-4">
 								<label htmlFor={field.name} className="sr-only">
 									{m.login_phone_number()}
@@ -81,7 +80,10 @@ function Login() {
 									value={field.state.value}
 									onBlur={field.handleBlur}
 									onChange={field.handleChange}
-									isInvalid={!!field.state.meta.errors?.length}
+									inputMode="numeric"
+									isInvalid={
+										!!field.state.meta.errors.at(0) && field.state.meta.isDirty
+									}
 								>
 									<InputBase
 										type="tel"
@@ -90,11 +92,11 @@ function Login() {
 								</InputGroup>
 							</div>
 						)}
-					/>
+					</loginForm.Field>
 					<loginForm.Subscribe
 						selector={(state) => [state.canSubmit, state.isSubmitting]}
-						// biome-ignore lint/correctness/noChildrenProp: <explanation>
-						children={([canSubmit, isSubmitting]) => (
+					>
+						{([canSubmit, isSubmitting]) => (
 							<Button
 								className="w-full"
 								color="primary"
@@ -107,16 +109,22 @@ function Login() {
 									: m.login_page_send_code()}
 							</Button>
 						)}
-					/>
+					</loginForm.Subscribe>
 				</form>
 			</div>
 		</div>
 	);
 }
 
+function toEnglishDigits(input: string): string {
+	const persianNumbers = "۰۱۲۳۴۵۶۷۸۹";
+	return input.replace(/[۰-۹]/g, (d) => String(persianNumbers.indexOf(d)));
+}
+
 const LoginSchema = v.object({
 	phoneNumber: v.pipe(
 		v.string(),
+		v.transform(toEnglishDigits),
 		v.regex(/^(\+98|0)?9\d{9}$/, m.login_page_phone_number_error()),
 	),
 });

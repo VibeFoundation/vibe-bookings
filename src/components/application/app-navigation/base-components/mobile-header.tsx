@@ -1,4 +1,4 @@
-import { X as CloseIcon, Menu02 } from "@untitledui/icons";
+import { X as CloseIcon, Menu01 } from "@untitledui/icons";
 import type { PropsWithChildren } from "react";
 import {
 	Button as AriaButton,
@@ -7,22 +7,21 @@ import {
 	Modal as AriaModal,
 	ModalOverlay as AriaModalOverlay,
 } from "react-aria-components";
-import { UntitledLogo } from "@/components/foundations/logo/untitledui-logo";
+import HeaderTitle from "@/components/headerTitle";
 import { cx } from "@/utils/cx";
 
 export const MobileNavigationHeader = ({ children }: PropsWithChildren) => {
 	return (
 		<AriaDialogTrigger>
-			<header className="flex h-16 items-center justify-between border-b border-secondary bg-primary py-3 pr-2 pl-4 lg:hidden">
-				<UntitledLogo />
-
+			<header className="flex h-16 items-center gap-3 border-b border-secondary bg-primary py-3 pr-2 pl-4 lg:hidden">
 				<AriaButton
 					aria-label="Expand navigation menu"
 					className="group flex items-center justify-center rounded-lg bg-primary p-2 text-fg-secondary outline-focus-ring hover:bg-primary_hover hover:text-fg-secondary_hover focus-visible:outline-2 focus-visible:outline-offset-2"
 				>
-					<Menu02 className="size-6 transition duration-200 ease-in-out group-aria-expanded:opacity-0" />
+					<Menu01 className="size-6  transition duration-200 ease-in-out group-aria-expanded:opacity-0" />
 					<CloseIcon className="absolute size-6 opacity-0 transition duration-200 ease-in-out group-aria-expanded:opacity-100" />
 				</AriaButton>
+				<HeaderTitle />
 			</header>
 
 			<AriaModalOverlay

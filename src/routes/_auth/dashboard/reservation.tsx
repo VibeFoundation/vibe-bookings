@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type { SVGProps } from "react";
 import { useState } from "react";
+import { m } from "@/paraglide/messages";
 
 // === TYPESCRIPT INTERFACES ===
 interface Appointment {
@@ -182,6 +183,9 @@ const UserIcon = (props: SVGProps<SVGSVGElement>) => (
 );
 
 export const Route = createFileRoute("/_auth/dashboard/reservation")({
+	context: () => {
+		return { title: () => m.reservation() };
+	},
 	component: BookedAppointments,
 });
 

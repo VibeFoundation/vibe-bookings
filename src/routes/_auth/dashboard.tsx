@@ -4,6 +4,7 @@ import {
 	Link,
 	linkOptions,
 	Outlet,
+	useLocation,
 } from "@tanstack/react-router";
 import { BarChartSquare02, Clapperboard, Settings01 } from "@untitledui/icons";
 import { useState } from "react";
@@ -14,6 +15,7 @@ import type {
 	NavItemType,
 } from "@/components/application/app-navigation/config";
 import { SidebarNavigationSectionDividers } from "@/components/application/app-navigation/sidebar-navigation/sidebar-section-dividers";
+import HeaderTitle from "@/components/headerTitle";
 import { MenuIcon } from "@/components/icons/icons";
 import { authClient } from "@/lib/auth-client";
 import { m } from "@/paraglide/messages";
@@ -55,12 +57,17 @@ const navItemsWithDividers: (NavItemType | NavItemDividerType)[] = [
 	},
 ];
 
-export const SidebarSectionDividersDemo = () => (
-	<SidebarNavigationSectionDividers
-		activeUrl="/"
-		items={navItemsWithDividers}
-	/>
-);
+export const SidebarSectionDividersDemo = () => {
+	const location = useLocation();
+	console.log(location.pathname);
+
+	return (
+		<SidebarNavigationSectionDividers
+			activeUrl={location.pathname}
+			items={navItemsWithDividers}
+		/>
+	);
+};
 
 export const Route = createFileRoute("/_auth/dashboard")({
 	component: AdminPanelComponent,
@@ -83,35 +90,17 @@ function AdminPanelComponent() {
 	};
 
 	return (
-		<div className="flex h-screen bg-gray-50">
-			<aside className="hidden lg:block w-64 bg-white border-l border-gray-200">
-				<SidebarSectionDividersDemo />
-			</aside>
-			<button
-				type="button"
-				className={`fixed inset-0 z-30 transition-opacity bg-black bg-opacity-25 lg:hidden ${isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
-				onClick={() => setSidebarOpen(false)}
-			></button>
-			<aside
-				className={`fixed top-0 right-0 h-full w-64 bg-white z-40 transform transition-transform lg:hidden ${isSidebarOpen ? "translate-x-0" : "translate-x-full"}`}
-			>
+		<div className="flex xs:flex-row flex-col  h-screen bg-gray-50">
+			<aside className="lg:block lg:w-64 bg-white border-l border-gray-200">
 				<SidebarSectionDividersDemo />
 			</aside>
 
-			<div className="flex-1 flex flex-col overflow-hidden">
-				<header className="h-20 bg-white border-b border-gray-200 flex items-center justify-between px-4 sm:px-6 lg:px-8 shrink-0">
-					<div className="flex items-center">
-						<button
-							type="button"
-							onClick={() => setSidebarOpen(true)}
-							className="lg:hidden text-gray-500 mr-4"
-						>
-							<MenuIcon />
-						</button>
-						<h1 className="text-xl sm:text-2xl font-bold text-gray-800">
-							داشبورد
-						</h1>
-					</div>
+			<div className="flex-1 flex flex-col">
+				<header className="h-20 bg-white border-b hidden lg:flex border-gray-200  items-center justify-between px-4 sm:px-6 lg:px-8 shrink-0">
+					<h1 className="text-xl sm:text-2xl font-bold text-gray-800">
+						<HeaderTitle />
+					</h1>
+
 					<button
 						type="button"
 						className="bg-purple-500 text-white font-semibold px-4 py-2 rounded-lg text-sm hover:bg-purple-600 transition-colors hidden sm:block"
