@@ -31,6 +31,29 @@ export const authPrivateMiddlewareFn = createMiddleware({
 	return ctx.next({ context: { authInfo } });
 });
 
+export const organizationRequiredMiddlewareFn = createMiddleware({
+	type: "function",
+})
+	.middleware([authPrivateMiddlewareFn])
+	.server(async (ctx) => {
+		const activeOrgId = ctx.context.authInfo.session.activeOrganizationId;
+		if (!activeOrgId) {
+			throw new Error("Please select an organization first");
+		}
+
+		return ctx.next({
+			context: {
+				authInfo: {
+					...ctx.context.authInfo,
+					session: {
+						...ctx.context.authInfo.session,
+						activeOrganizationId: activeOrgId,
+					},
+				},
+			},
+		});
+	});
+
 function UnauthorizedResponse() {
 	return new Response("Unauthorized Request", { status: 401 });
 }

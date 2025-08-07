@@ -9,17 +9,17 @@ import { S } from "@/lib/schema";
 import { organizationRequiredMiddlewareFn } from "./auth-middleware";
 import { generateTxId } from "./generateTxId";
 
-const serviceOrganizationInsertSchema = v.omit(
-	createInsertSchema(S.serviceOrganization),
-	["organizationId", "id"],
-);
+const customerInsertSchema = v.omit(createInsertSchema(S.customer), [
+	"organizationId",
+	"id",
+]);
 
-export const serviceOrganizationCreate = createServerFn()
+export const customerCreate = createServerFn()
 	.middleware([organizationRequiredMiddlewareFn])
-	.validator(serviceOrganizationInsertSchema)
+	.validator(customerInsertSchema)
 	.handler(async (ctx) => {
 		return db.transaction(async (tx) => {
-			await tx.insert(S.serviceOrganization).values({
+			await tx.insert(S.customer).values({
 				...ctx.data,
 				organizationId: ctx.context.authInfo.session.activeOrganizationId,
 			});
@@ -30,18 +30,18 @@ export const serviceOrganizationCreate = createServerFn()
 		});
 	});
 
-const serviceOrganizationUpdateSchema = v.array(
+const customerUpdateSchema = v.array(
 	v.omit(
-		createUpdateSchema(S.serviceOrganization, {
-			serviceId: v.pipe(v.string(), v.uuid()),
+		createUpdateSchema(S.customer, {
+			id: v.pipe(v.string(), v.uuid()),
 		}),
-		["id", "organizationId"],
+		["organizationId"],
 	),
 );
 
-export const serviceOrganizationUpdate = createServerFn()
+export const customerUpdate = createServerFn()
 	.middleware([organizationRequiredMiddlewareFn])
-	.validator(serviceOrganizationUpdateSchema)
+	.validator(customerUpdateSchema)
 	.handler((ctx) => {
 		return db.transaction(async (tx) => {
 			const values = ctx.data.map((d) => ({
@@ -49,14 +49,14 @@ export const serviceOrganizationUpdate = createServerFn()
 				organizationId: ctx.context.authInfo.session.activeOrganizationId,
 			}));
 
-			await tx.query.serviceOrganization.upsert({ data: values });
+			await tx.query.customer.upsert({ data: values });
 			const txid = await generateTxId(tx);
 
 			return { txid };
 		});
 	});
 
-const serviceOrganizationDeleteSchema = v.array(
+const customerDeleteSchema = v.array(
 	v.pipe(
 		v.string(),
 		v.uuid(),
@@ -64,16 +64,16 @@ const serviceOrganizationDeleteSchema = v.array(
 	),
 );
 
-export const serviceCoranizationDelete = createServerFn()
+export const customerDelete = createServerFn()
 	.middleware([organizationRequiredMiddlewareFn])
-	.validator(serviceOrganizationDeleteSchema)
+	.validator(customerDeleteSchema)
 	.handler((ctx) => {
 		return db.transaction(async (tx) => {
 			await tx
-				.delete(S.serviceOrganization)
+				.delete(S.customer)
 				.where(
 					and(
-						inArray(S.serviceOrganization.serviceId, ctx.data),
+						inArray(S.customer.id, ctx.data),
 						eq(
 							S.serviceOrganization.organizationId,
 							ctx.context.authInfo.session.activeOrganizationId,

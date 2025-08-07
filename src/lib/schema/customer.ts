@@ -22,7 +22,7 @@ export const customer = pgTable(
 		firstName: varchar("first_name", { length: 128 }),
 		lastName: varchar("last_name", { length: 128 }),
 		phoneNumber: varchar("phone_number", { length: 16 }),
-		organizationId: text("organization_id"),
+		organizationId: text("organization_id").notNull(),
 	},
 	(t) => [
 		primaryKey({ columns: [t.id] }),
@@ -49,7 +49,9 @@ export const customerVisit = pgTable(
 		foreignKey({
 			columns: [t.customerId],
 			foreignColumns: [customer.id],
-		}),
+		})
+			.onDelete("cascade")
+			.onUpdate("cascade"),
 	],
 );
 
@@ -70,10 +72,15 @@ export const customerVisitService = pgTable(
 		foreignKey({
 			columns: [t.customerVisitId],
 			foreignColumns: [customerVisit.id],
-		}),
+		})
+			.onDelete("cascade")
+			.onUpdate("cascade"),
+
 		foreignKey({
 			columns: [t.serviceOrganizationId],
 			foreignColumns: [serviceOrganization.id],
-		}),
+		})
+			.onDelete("cascade")
+			.onUpdate("cascade"),
 	],
 );

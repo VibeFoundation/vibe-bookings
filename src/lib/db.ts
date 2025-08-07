@@ -1,15 +1,11 @@
 "use server";
 import { drizzle } from "drizzle-orm/bun-sql";
-import { R, S } from "./schema";
+import { S } from "./schema";
+import { relations } from "./schema/relations";
 import { serverEnv } from "./server-env";
+import "drizzle-plus/pg/upsert";
+import "drizzle-plus/pg/findUnique";
+import "drizzle-plus/pg/findManyAndCount";
+import "drizzle-plus/pg/updateMany";
 
-// if (process.env.NODE_ENV === "development") {
-// 	globalThis.GLOBAL_DB = drizzle(serverEnv.DATABASE_URL, {
-// 		schema: { ...S, ...R },
-// 	});
-// }
-
-export const db =
-	// process.env.NODE_ENV !== "development"
-	drizzle(serverEnv.DATABASE_URL, { schema: { ...S, ...R } });
-// : globalThis.GLOBAL_DB as ;
+export const db = drizzle(serverEnv.DATABASE_URL, { relations, schema: S });

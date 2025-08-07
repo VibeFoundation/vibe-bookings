@@ -2,58 +2,54 @@ import { electricCollectionOptions } from "@tanstack/electric-db-collection";
 import { createCollection } from "@tanstack/react-db";
 import * as v from "valibot";
 import {
-	serviceCoranizationDelete,
-	serviceOrganizationCreate,
-	serviceOrganizationUpdate,
-} from "@/server/service-organization";
+	customerCreate,
+	customerDelete,
+	customerUpdate,
+} from "@/server/customer";
 
-export const serviceOrganizationSchema = v.object({
-	id: v.string(),
-	priceEstimation: v.nullable(v.number()),
-	durationEstimation: v.nullable(v.string()),
-	organizationId: v.string(),
-	serviceId: v.string(),
+const customerSchema = v.object({
+	id: v.pipe(v.string(), v.uuid()),
+	firstName: v.nullable(v.string()),
+	lastName: v.nullable(v.string()),
+	phoneNumber: v.nullable(v.string()),
+	organizationId: v.pipe(v.string()),
 });
 
-export type ServiceOrganizationSchema = v.InferOutput<
-	typeof serviceOrganizationSchema
->;
-
-export const serviceOrganizationCollection = createCollection(
+export const customerCollection = createCollection(
 	electricCollectionOptions({
 		id: `service-organization`,
 		shapeOptions: {
 			url: `http://localhost:3002/api/electric/service-organization`,
 		},
 		getKey: (item) => item.id,
-		schema: serviceOrganizationSchema,
+		schema: customerSchema,
 		onInsert: async (params) => {
 			const {
 				id: _id,
 				organizationId: _oid,
 				...modified
 			} = params.transaction.mutations[0].modified;
-			const res = await serviceOrganizationCreate({ data: modified });
+			const res = await customerCreate({ data: modified });
 
 			return { txid: res.txid };
 		},
 		onUpdate: async (params) => {
 			const data = params.transaction.mutations?.map((m) => {
-				const { id: _id, organizationId: _oid, ...v } = m.modified;
+				const { organizationId: _oid, ...v } = m.modified;
 
 				return v;
 			});
 
-			const res = await serviceOrganizationUpdate({ data });
+			const res = await customerUpdate({ data });
 
 			return { txid: res.txid };
 		},
 		onDelete: async (params) => {
 			const serviceIds = params.transaction.mutations?.map(
-				(v) => v.modified.serviceId,
+				(v) => v.modified.id,
 			);
 
-			const res = await serviceCoranizationDelete({ data: serviceIds });
+			const res = await customerDelete({ data: serviceIds });
 
 			return { txid: res.txid };
 		},
