@@ -78,22 +78,22 @@ export const InputBase = ({
 		sm: {
 			root: cx(
 				"px-3 py-2",
-				hasTrailingIcon && "pr-9",
-				hasLeadingIcon && "pl-10",
+				hasTrailingIcon && "pe-9",
+				hasLeadingIcon && "ps-10",
 			),
-			iconLeading: "left-3",
-			iconTrailing: "right-3",
-			shortcut: "pr-2.5",
+			iconLeading: "start-3",
+			iconTrailing: "end-3",
+			shortcut: "pe-2.5",
 		},
 		md: {
 			root: cx(
 				"px-3.5 py-2.5",
-				hasTrailingIcon && "pr-9.5",
-				hasLeadingIcon && "pl-10.5",
+				hasTrailingIcon && "pe-9.5",
+				hasLeadingIcon && "ps-10.5",
 			),
-			iconLeading: "left-3.5",
-			iconTrailing: "right-3.5",
-			shortcut: "pr-3",
+			iconLeading: "start-3.5",
+			iconTrailing: "end-3.5",
+			shortcut: "ps-3",
 		},
 	});
 
@@ -183,7 +183,7 @@ export const InputBase = ({
 			{shortcut && (
 				<div
 					className={cx(
-						"pointer-events-none absolute inset-y-0.5 right-0.5 z-10 flex items-center rounded-r-[inherit] bg-linear-to-r from-transparent to-bg-primary to-40% pl-8",
+						"pointer-events-none absolute inset-y-0.5 end-0.5 z-10 flex items-center rounded-r-[inherit] bg-linear-to-r from-transparent to-bg-primary to-40% ps-8",
 						sizes[inputSize].shortcut,
 					)}
 				>
