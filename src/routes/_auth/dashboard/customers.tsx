@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
+import { Input } from "@/components/base/input/input";
 import { m } from "@/paraglide/messages";
 
 interface Customer {
@@ -31,7 +32,7 @@ const ChevronLeftIcon: React.FC = () => (
 
 const SearchIcon: React.FC = () => (
 	<svg
-		className="h-5 w-5 text-gray-400"
+		className="h-5 w-12 text-gray-400"
 		xmlns="http://www.w3.org/2000/svg"
 		viewBox="0 0 20 20"
 		fill="currentColor"
@@ -170,7 +171,7 @@ function Customers() {
 
 	// Pagination state
 	const [page, setPage] = useState(1);
-	const pageSize = 5;
+	const pageSize = 4;
 	const filteredCustomers = useMemo(() => {
 		return allCustomers.filter(
 			(customer) =>
@@ -223,18 +224,17 @@ function Customers() {
 
 			<div className="rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden h-full flex flex-col">
 				<div className="p-4 sm:p-6 border-b border-gray-200">
-					<div className="relative">
-						<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-							<SearchIcon />
-						</div>
-						<input
-							type="text"
-							placeholder="جستجوی مشتری..."
-							value={searchTerm}
-							onChange={(e) => setSearchTerm(e.target.value)}
-							className="block w-full max-w-sm rounded-md border-0 py-2 pr-10 text-gray-900 outline-0 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
-						/>
-					</div>
+					<Input
+						label="جستجوی مشتری"
+						placeholder="نام یا ایمیل مشتری را وارد کنید..."
+						value={searchTerm}
+						onChange={(e) => setSearchTerm(e)}
+						icon={SearchIcon}
+						size="md"
+						className="w-80"
+						inputClassName="ps-0"
+						autoComplete="off"
+					/>
 				</div>
 
 				{/* Desktop Table */}
